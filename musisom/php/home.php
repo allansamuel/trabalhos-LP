@@ -48,13 +48,36 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td> <input type="checkbox"> </td>
-                <td> a </td>
-                <td> b </td>
-                <td> c </td>
-                <td> d </td>
+            <tr data-toggle="modal" data-target=".modal.open" title="Clique para abrir detalhes">
+                <a>
+                    <td> <input type="checkbox"> </td>
+                    <td> a </td>
+                    <td> b </td>
+                    <td> c </td>
+                    <td> d </td>
+                </a>
+                
             </tr>
+
+            <div class="modal open fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Título do modal</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-primary">Salvar mudanças</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
             
         </tbody>
     </table>
