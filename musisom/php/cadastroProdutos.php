@@ -19,38 +19,29 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="navlinks-content collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav row justify-content-end">
-        
-            <li class="nav-item ">
-                <a class="nav-link" href="#">Cadastrar produto</a>
-            </li>
-            <li class="nav-item col order-last">
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Busque produtos" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
-                </form>
-            </li>
-        
-        </ul>
-        
-    </div>
+        <form class="form-inline ">
+            <input class="form-control mr-sm-2" type="search" placeholder="Busque produtos" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
+        </form>
+    
     </nav>
 
     <div class="form container">
     <h3>Cadastre um novo Produto</h3>
-        <form method="post">
+        <form action="./actionCadastro.php" method="post">
             <div id="cadastro-produto">
                 <label for="descricao">Descrição</label>
-                    <input id="descricao" class="campo-cadastro form-control mr-sm-2" type="text" placeholder="Ex. Flauta Doce Yamaha Sopranino">
+                    <input name="descricao" id="descricao" class="campo-cadastro form-control mr-sm-2" type="text" placeholder="Ex. Flauta Doce Yamaha Sopranino">
                 <label for="foto">Tipo</label>
-                    <input class="campo-cadastro form-control mr-sm-2" type="text" placeholder="Ex. Sopro" >
+                    <input name="tipo" class="campo-cadastro form-control mr-sm-2" type="text" placeholder="Ex. Sopro" >
                 <label for="foto">Marca</label>
-                    <input class="campo-cadastro form-control mr-sm-2" type="text" placeholder="Ex. Yamaha" >
+                    <input name="marca" class="campo-cadastro form-control mr-sm-2" type="text" placeholder="Ex. Yamaha" >
+                <label for="foto">Valor Unitário</label>
+                    <input name="valor" class="campo-cadastro form-control mr-sm-2" type="number" step="0.01" min="0.0" placeholder="Ex. 50,00" >
                 <label for="foto">Estoque</label>
-                    <input class="campo-cadastro form-control mr-sm-2" type="number" min="0" placeholder="Ex. 49" >
+                    <input name="qtd_estoque" class="campo-cadastro form-control mr-sm-2" type="number" min="0" placeholder="Ex. 49" >
                 <label for="foto">Selecionar Foto</label>
-                    <input class="campo-cadastro" type="file" name="foto" id="foto" value="foto" >
+                    <input name="foto" class="campo-cadastro" type="file" name="foto" id="foto" value="foto" >
                 
             </div>
             <button class="btn btn-lg btn-block btn-success" type="submit">Cadastrar</button>

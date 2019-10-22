@@ -1,9 +1,5 @@
-html{
-    min-height: 100%;
-    width: 100%;
-}
-body{
-    min-height: 100%;
+html, body{
+    height: 100%;
     width: 100%;
 }
 
@@ -19,12 +15,12 @@ body{
     width: 42%;
     min-height: 100%;
     display: flex;
-    flex-direction: column
+    flex-direction: column;
+    position: relative;
 }
 .navbar-nav.row{
-    
     display: flex;
-    flex-direction: column
+    flex-direction: column;
 }
 .tabelaprodutos{
     margin-top:125px
@@ -52,10 +48,8 @@ body{
 .logotipo{
     width: 320px
 }
-.navbar-nav{
-    display:flex;
-    flex-direction: row;
-    justify-content: flex-end !important
+.form-inline {
+    padding-top: 20px;
 }
 
 .nav-item{
@@ -95,10 +89,14 @@ body{
     width: 100%;
 }
 .form.container{
-    padding: 20px;
+    padding-top: 50px;
     width: 60%;
     align-items: center;
     display: flex;
     flex-direction: column;
     margin: 0 !important;
+}
+.form.container form{
+    align-items: center;
+    width: 65%
 }
