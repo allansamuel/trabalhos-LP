@@ -74,9 +74,6 @@ html, body{
     width: 200px
 }
 
-.icon{
-    width: 25px
-}
 
 .campo-cadastro{
     margin-bottom: 10px
@@ -89,7 +86,7 @@ html, body{
     width: 100%;
 }
 .form.container{
-    padding-top: 50px;
+    padding-top: 20px;
     width: 60%;
     align-items: center;
     display: flex;

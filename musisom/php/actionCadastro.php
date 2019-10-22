@@ -77,10 +77,10 @@
                         endif;  
                 
                         
-                        $nome_foto = date('dmY') . '_' . $_FILES['foto']['name'];  
+                        $nome_foto = getdate() . '_' . $_FILES['foto']['name'];  
                             
                        
-                        if (!move_uploaded_file($_FILES['foto']['tmp_name'], 'fotos/'.$nome_foto)):  
+                        if (!move_uploaded_file($_FILES['foto']['tmp_name'], '../fotos/'.$nome_foto)):  
                             echo "Houve um erro ao gravar arquivo na pasta de destino!";  
                         endif;  
                     endif;  
