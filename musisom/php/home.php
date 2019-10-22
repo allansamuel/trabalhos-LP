@@ -14,7 +14,7 @@
 <body>
 
     <nav class="shadow p-3 mb-5 navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/"><img class="logotipo" src="../img/logo.png"> </a>
+    <a class="navbar-brand" href="/trabalhos-LP/musisom/php/"><img class="logotipo" src="../img/logo.png"> </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -38,9 +38,9 @@
     </nav>
 
     <table class="tabelaprodutos table">
-        <thead class="thead-dark">
+        <thead class="tabelaprodutos-head thead-dark">
             <tr>
-            <th scope="col"><input type="checkbox">Selecionar Todos</th>
+            <th id="col1" scope="col"><button class="btn btn-outline-success" type="submit">Selecionar Todos</button></th>
             <th scope="col">Tipo</th>
             <th scope="col">Marca</th>
             <th scope="col">Valor</th>
@@ -49,10 +49,11 @@
         </thead>
         <tbody>
             <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
+                <td> <input type="checkbox"> </td>
+                <td> a </td>
+                <td> b </td>
+                <td> c </td>
+                <td> d </td>
             </tr>
             
         </tbody>

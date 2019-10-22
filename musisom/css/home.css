@@ -17,7 +17,7 @@ body{
 }
 
 .tabelaprodutos{
-    margin-top:110px
+    margin-top:125px
 }
 
 .nav-link{
@@ -40,7 +40,7 @@ body{
 }
 
 .logotipo{
-    width: 200px
+    width: 250px
 }
 .navbar-nav{
     display:flex;
@@ -54,4 +54,17 @@ body{
 }
 .navlinks-content{
     flex-direction: row-reverse;
+}
+
+.tabelaprodutos-head th{
+    color: black !important;
+    background-color: white !important;
+    width: fit-content
+}
+.tabelaprodutos td {
+    width: fit-content
+}
+
+#col1{
+    width: 200px
 }
