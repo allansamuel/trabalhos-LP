@@ -97,3 +97,17 @@ html, body{
     align-items: center;
     width: 65%
 }
+
+.form-col{
+    width: 50%;
+}
+
+.form.subcontainer{
+    display: flex;
+    flex-direction: row;
+}
+
+#form-foto{
+    width: 100%;
+    justify-content: flex-start;
+}

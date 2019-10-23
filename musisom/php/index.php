@@ -97,7 +97,7 @@ endif;
                 <td> <?php echo  $produto->qtd_estoque ?> </td>
                 <td> R$ <?php echo ($produto->valor_total) ?> </td>
                 <td>
-                    <a href='editar.php?id=<?=$produto->id?>' class="btn btn-danger" rel="<?= $produto->codigo;?>"><img class="icon" src="../img/pencil.png" /></a>
+                    <a href='editarProdutos.php?id=<?=$produto->codigo?>' class="btn btn-success" ><img class="icon" src="../img/pencil.png" /></a>
                     <a href='javascript:void(0)' class="btn btn-danger link_exclusao" rel="<?= $produto->codigo;?>"><img class="icon" src="../img/delete.png" /></a>
                     <!-- <img class="icon" data-toggle="modal" data-target=".modal.open<?php echo $aux; ?>" src="../img/eye-outline.png"   title="Clique para abrir detalhes"/> -->
 
