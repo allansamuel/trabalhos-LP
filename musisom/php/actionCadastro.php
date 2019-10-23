@@ -57,55 +57,58 @@
 
 
 			
+            if($mensagem == ''){
+                if ($acao == 'incluir'):
 
-            if ($acao == 'incluir'):
-
-                $nome_foto = 'padrao.jpg';
-                if(isset($_FILES['foto']) && $_FILES['foto']['size'] > 0 ): 
-                    $extensoes_aceitas = array('bmp' ,'png', 'svg', 'jpeg', 'jpg');
-                    $extensao = strtolower(end(explode('.', $_FILES['foto']['name'])));
-
-                    if (array_search($extensao, $extensoes_aceitas) === false):
-                    echo "<h1>Extensão Inválida!</h1>";
-                    exit;
+                    $nome_foto = 'padrao.jpg';
+                    if(isset($_FILES['foto']) && $_FILES['foto']['size'] > 0 ): 
+                        $extensoes_aceitas = array('bmp' ,'png', 'svg', 'jpeg', 'jpg');
+                        $extensao = strtolower(end(explode('.', $_FILES['foto']['name'])));
+    
+                        if (array_search($extensao, $extensoes_aceitas) === false):
+                        echo "<h1>Extensão Inválida!</h1>";
+                        exit;
+                        endif;
+        
+                        if(is_uploaded_file($_FILES['foto']['tmp_name'])):  
+                                
+                            if(!file_exists("../fotos")):  
+                                mkdir("../fotos");  
+                            endif;  
+                    
+                            $nome_foto = date('dmY') . '_' . $_FILES['foto']['name'];  
+                                
+                            if (!move_uploaded_file($_FILES['foto']['tmp_name'], '../fotos/'.$nome_foto)):  
+                                echo "Houve um erro ao gravar arquivo na pasta de destino!";  
+                            endif;  
+                        endif;  
                     endif;
     
-                    if(is_uploaded_file($_FILES['foto']['tmp_name'])):  
-                            
-                        if(!file_exists("../fotos")):  
-                            mkdir("../fotos");  
-                        endif;  
                 
-                        $nome_foto = date('dmY') . '_' . $_FILES['foto']['name'];  
-                            
-                        if (!move_uploaded_file($_FILES['foto']['tmp_name'], '../fotos/'.$nome_foto)):  
-                            echo "Houve um erro ao gravar arquivo na pasta de destino!";  
-                        endif;  
-                    endif;  
+    
+                    $sql = 'INSERT INTO produtos 
+                    VALUES(null, :tipo, :marca, :descricao, format( :valor , 2) , :qtd_estoque, format( :total , 2), :foto)';
+    
+                    $stm = $conexao->prepare($sql);
+                    $stm->bindValue(':tipo', $tipo);
+                    $stm->bindValue(':marca', $marca);
+                    $stm->bindValue(':descricao', $descricao);
+                    $stm->bindValue(':valor', $valor);
+                    $stm->bindValue(':qtd_estoque', $qtd_estoque);
+                    $stm->bindValue(':total', $qtd_estoque * $valor);
+                    $stm->bindValue(':foto', $nome_foto);
+                    $retorno = $stm->execute();
+    
+                    if ($retorno):
+                        echo "<div class='alert alert-success' role='alert'>Registro inserido com sucesso, aguarde você está sendo redirecionado ...</div> ";
+                    else:
+                        echo "<div class='alert alert-danger' role='alert'>Erro ao inserir registro!</div> ";
+                    endif;
+    
+                    echo "<meta http-equiv=refresh content='3;URL=index.php'>";
                 endif;
-
+            }
             
-
-                $sql = 'INSERT INTO produtos 
-                VALUES(null, :tipo, :marca, :descricao, format( :valor , 2) , :qtd_estoque, :foto)';
-
-                $stm = $conexao->prepare($sql);
-                $stm->bindValue(':tipo', $tipo);
-                $stm->bindValue(':marca', $marca);
-                $stm->bindValue(':descricao', $descricao);
-                $stm->bindValue(':valor', $valor);
-                $stm->bindValue(':qtd_estoque', $qtd_estoque);
-                $stm->bindValue(':foto', $nome_foto);
-                $retorno = $stm->execute();
-
-                if ($retorno):
-                    echo "<div class='alert alert-success' role='alert'>Registro inserido com sucesso, aguarde você está sendo redirecionado ...</div> ";
-                else:
-                    echo "<div class='alert alert-danger' role='alert'>Erro ao inserir registro!</div> ";
-                endif;
-
-                echo "<meta http-equiv=refresh content='3;URL=index.php'>";
-            endif;
 
             if ($acao == 'excluir'):
 

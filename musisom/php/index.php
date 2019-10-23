@@ -70,6 +70,7 @@ endif;
     <table class="tabelaprodutos table">
         <thead class="tabelaprodutos-head thead-dark">
             <tr>
+            <th scope="col">Imagem</th>
             <th scope="col">Descrição</th>
             <th scope="col">Tipo</th>
             <th scope="col">Marca</th>
@@ -88,17 +89,17 @@ endif;
                   ?>  
              
             <tr>
-                
+                <td> <img src="../fotos/<?php echo $produto->foto ?>" class="produto-foto" data-toggle="modal" data-target=".modal.open<?php echo $aux; ?>"> </td>
                 <td> <?php echo $produto->descricao ?> </td>
                 <td> <?php echo  $produto->tipo ?> </td>
                 <td> <?php echo  $produto->marca ?> </td>
                 <td> R$ <?php echo  $produto->valor ?> </td>
                 <td> <?php echo  $produto->qtd_estoque ?> </td>
-                <td> R$ <?php echo ($produto->qtd_estoque) * ($produto->valor) ?> </td>
+                <td> R$ <?php echo ($produto->valor_total) ?> </td>
                 <td>
-                    <img class="icon" src="../img/pencil.png" />
+                    <a href='editar.php?id=<?=$produto->id?>' class="btn btn-danger" rel="<?= $produto->codigo;?>"><img class="icon" src="../img/pencil.png" /></a>
                     <a href='javascript:void(0)' class="btn btn-danger link_exclusao" rel="<?= $produto->codigo;?>"><img class="icon" src="../img/delete.png" /></a>
-                    <img class="icon" data-toggle="modal" data-target=".modal.open<?php echo $aux; ?>" src="../img/eye-outline.png"   title="Clique para abrir detalhes"/>
+                    <!-- <img class="icon" data-toggle="modal" data-target=".modal.open<?php echo $aux; ?>" src="../img/eye-outline.png"   title="Clique para abrir detalhes"/> -->
 
 
                 </td>

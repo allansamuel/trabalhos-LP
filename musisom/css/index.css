@@ -63,8 +63,18 @@ body{
 }
 .tabelaprodutos td {
     width: fit-content;
+    position: relative;
 }
 
 .icon{
     width: 25px
+}
+
+.produto-foto{
+    width: 100px;
+}
+
+tr{
+    align-items: center;
+    height: fit-content;
 }
