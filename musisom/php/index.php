@@ -82,7 +82,9 @@ endif;
         <tbody>
             <?php
             if(!empty($produtos)){
+                $aux = 0;
                 foreach($produtos as $produto){
+                    $aux = $aux + 1;
                   ?>  
              
             <tr>
@@ -95,14 +97,14 @@ endif;
                 <td>
                     <img class="icon" src="../img/pencil.png" />
                     <img class="icon" src="../img/delete.png" />
-                    <img class="icon" data-toggle="modal" data-target=".modal.open" src="../img/eye-outline.png"   title="Clique para abrir detalhes"/>
+                    <img class="icon" data-toggle="modal" data-target=".modal.open<?php echo $aux; ?>" src="../img/eye-outline.png"   title="Clique para abrir detalhes"/>
 
 
                 </td>
                     
             </tr>
 
-            <div class="modal open<?php  ?> fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal open<?php echo $aux; ?> fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                     <div class="modal-header">
@@ -112,7 +114,7 @@ endif;
                         </button>
                     </div>
                     <div class="modal-body">
-                        <img src="../fotos/<?php $produto->foto ?>" />
+                        <img src="../fotos/<?php echo $produto->foto ?>" />
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>

@@ -28,20 +28,21 @@
 
     <div class="form container">
     <h3>Cadastre um novo Produto</h3>
-        <form action="./actionCadastro.php" method="post">
+        <form action="./actionCadastro.php" method="post" enctype='multipart/form-data'>
             <div id="cadastro-produto">
                 <label for="descricao">Descrição</label>
                     <input name="descricao" id="descricao" class="campo-cadastro form-control mr-sm-2" type="text" placeholder="Ex. Flauta Doce Yamaha Sopranino">
-                <label for="foto">Tipo</label>
+                <label for="tipo">Tipo</label>
                     <input name="tipo" class="campo-cadastro form-control mr-sm-2" type="text" placeholder="Ex. Sopro" >
-                <label for="foto">Marca</label>
+                <label for="marca">Marca</label>
                     <input name="marca" class="campo-cadastro form-control mr-sm-2" type="text" placeholder="Ex. Yamaha" >
-                <label for="foto">Valor Unitário</label>
+                <label for="valor">Valor Unitário</label>
                     <input name="valor" class="campo-cadastro form-control mr-sm-2" type="number" step="0.01" min="0.0" placeholder="Ex. 50,00" >
-                <label for="foto">Estoque</label>
+                <label for="qtd_estoque">Estoque</label>
                     <input name="qtd_estoque" class="campo-cadastro form-control mr-sm-2" type="number" min="0" placeholder="Ex. 49" >
                 <label for="foto">Selecionar Foto</label>
-                    <input name="foto" class="campo-cadastro" type="file" name="foto" id="foto" value="foto" >
+                    <input type="file" name="foto" id="foto" value="foto" class="campo-cadastro">
+                    <input type="hidden" name="acao" value="incluir">
                 
             </div>
             <button class="btn btn-lg btn-block btn-success" type="submit">Cadastrar</button>

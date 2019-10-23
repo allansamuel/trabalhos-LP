@@ -22,15 +22,17 @@
 
         
         $mensagem = '';
+        $acao  = (isset($_POST['acao'])) ? $_POST['acao'] : '';
 		$id    = (isset($_POST['id'])) ? $_POST['id'] : '';
 		$descricao  = (isset($_POST['descricao'])) ? $_POST['descricao'] : '';
 		$tipo  = (isset($_POST['tipo'])) ? $_POST['tipo'] : '';
 		$valor  = (isset($_POST['valor'])) ? $_POST['valor'] : '';
 		$marca  = (isset($_POST['marca'])) ? $_POST['marca'] : '';
 		$qtd_estoque  = (isset($_POST['qtd_estoque'])) ? $_POST['qtd_estoque'] : '';
-		$foto	= (isset($_POST['foto'])) ? $_POST['foto'] : '';
+		/* $foto	= (isset($_POST['foto'])) ? $_POST['foto'] : ''; */
 
 
+        if ($acao != 'excluir'):
 			if ($descricao == '' || strlen($descricao) < 3):
 				$mensagem .= '<li>Favor preencher Descrição do Produto.</li>';
 		    endif;
@@ -46,45 +48,43 @@
 			if ($qtd_estoque == '' ):
 				$mensagem .= '<li>Favor preencher Estoque do Produto.</li>';
 		    endif;
-			if ($foto == '' ):
-				$mensagem .= '<li>Favor adicionar foto do Produto.</li>';
-		    endif;
 
-
-			if ($mensagem != ''){
+            if ($mensagem != ''){
                 $mensagem = '<ul>' . $mensagem . '</ul>';
 				echo "<div class='alert alert-danger' role='alert'>".$mensagem."</div> ";
-            }else{
+            }
+        endif;
+
+
+			
+
+            if ($acao == 'incluir'):
 
                 $nome_foto = 'padrao.jpg';
-                if(isset($_FILES['foto']) && $_FILES['foto']['size'] > 0):  
-
+                if(isset($_FILES['foto']) && $_FILES['foto']['size'] > 0 ): 
                     $extensoes_aceitas = array('bmp' ,'png', 'svg', 'jpeg', 'jpg');
                     $extensao = strtolower(end(explode('.', $_FILES['foto']['name'])));
 
-                    
                     if (array_search($extensao, $extensoes_aceitas) === false):
                     echo "<h1>Extensão Inválida!</h1>";
                     exit;
                     endif;
     
-                    
                     if(is_uploaded_file($_FILES['foto']['tmp_name'])):  
                             
-                        
                         if(!file_exists("../fotos")):  
                             mkdir("../fotos");  
                         endif;  
                 
-                        
-                        $nome_foto = getdate() . '_' . $_FILES['foto']['name'];  
+                        $nome_foto = date('dmY') . '_' . $_FILES['foto']['name'];  
                             
-                       
                         if (!move_uploaded_file($_FILES['foto']['tmp_name'], '../fotos/'.$nome_foto)):  
                             echo "Houve um erro ao gravar arquivo na pasta de destino!";  
                         endif;  
                     endif;  
                 endif;
+
+            
 
                 $sql = 'INSERT INTO produtos 
                 VALUES(null, :tipo, :marca, :descricao, :valor, :qtd_estoque, :foto)';
@@ -105,7 +105,7 @@
                 endif;
 
                 echo "<meta http-equiv=refresh content='3;URL=index.php'>";
-            }
+            endif;
 
 
 		?>
