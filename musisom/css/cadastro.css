@@ -99,15 +99,23 @@ html, body{
 }
 
 .form-col{
-    width: 50%;
+    width: 46%;
 }
 
 .form.subcontainer{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 
 #form-foto{
     width: 100%;
-    justify-content: flex-start;
+    display: flex;
+}
+#foto{
+    height: fit-content;
+}
+#foto-input{
+    display: flex;
+    align-items: flex-end;
 }

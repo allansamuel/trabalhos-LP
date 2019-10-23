@@ -31,7 +31,6 @@ endif;
 </head>
 <body>
 
-
 	
 	<?php if(empty($produto)):?>
 		<h3 class="text-center text-danger">Cliente não encontrado!</h3>
@@ -58,32 +57,36 @@ endif;
 				
 				
 			
-				<form action="./actionCadastro.php" method="post" enctype='multipart/form-data'>
+				<form action="./actionProduto.php" method="post" enctype='multipart/form-data'>
 					<div id="cadastro-produto">
 						<div id="form-foto">
-								<div class="col-md-2">
-									<a href="#" class="thumbnail">
-										<img src="../fotos/<?=$produto->foto?>" width="200" id="foto-cliente">
-									</a>
-								</div>
-							<input type="file" name="foto" id="foto" value="foto" >
+							<div >
+								<a href="#" class="thumbnail">
+									<img src="../fotos/<?=$produto->foto?>" width="250" id="foto-cliente">
+								</a>
+							</div>
+
+							<div id="foto-input">
+								<input type="file" name="foto" id="foto" value="foto" >
+							</div>
+							
 						</div>
 						<label for="descricao">Descrição</label>
-							<input name="descricao" id="descricao" class="campo-cadastro form-control mr-sm-2" type="text" placeholder="Ex. Flauta Doce Yamaha Sopranino">
+							<input value="<?php echo $produto->descricao; ?>" name="descricao" id="descricao" class="campo-cadastro form-control mr-sm-2" type="text" placeholder="Ex. Flauta Doce Yamaha Sopranino">
 						<label for="tipo">Tipo</label>
-							<input name="tipo" class="campo-cadastro form-control mr-sm-2" type="text" placeholder="Ex. Sopro" >
+							<input value="<?php echo $produto->tipo; ?>" name="tipo" class="campo-cadastro form-control mr-sm-2" type="text" placeholder="Ex. Sopro" >
 						<label for="marca">Marca</label>
-							<input name="marca" class="campo-cadastro form-control mr-sm-2" type="text" placeholder="Ex. Yamaha" >
+							<input value="<?php echo $produto->marca; ?>" name="marca" class="campo-cadastro form-control mr-sm-2" type="text" placeholder="Ex. Yamaha" >
 						
 						<div class="form subcontainer">
 							<div class="form-col">
 								<label for="valor">Valor Unitário</label>
-								<input name="valor" class="campo-cadastro form-control mr-sm-2" type="number" step="0.01" min="0.0" placeholder="Ex. 50,00" >
+								<input value="<?php echo (str_replace(",", "",$produto->valor)); ?>" name="valor" class="campo-cadastro form-control mr-sm-2" type="number"  min="0" step="0.01" placeholder="Ex. 50,00" >
 							</div>
 
 							<div class="form-col">
 								<label for="qtd_estoque">Estoque</label>
-								<input name="qtd_estoque" class="campo-cadastro form-control mr-sm-2" type="number" min="0" placeholder="Ex. 49" >
+								<input value="<?php echo $produto->qtd_estoque; ?>" name="qtd_estoque" class="campo-cadastro form-control mr-sm-2" type="number" min="0" placeholder="Ex. 49" >
 							</div>
 						
 					
@@ -93,7 +96,7 @@ endif;
 							<input type="hidden" name="acao" value="editar">
 						
 					</div>
-					<button class="btn btn-lg btn-block btn-success" type="submit">Cadastrar</button>
+					<button class="btn btn-lg btn-block btn-success" type="submit">Editar</button>
 				</form>
 			</div>
 		</div>

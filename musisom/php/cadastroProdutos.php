@@ -28,7 +28,7 @@
 
     <div class="form container">
     <h3>Cadastre um novo Produto</h3>
-        <form action="./actionCadastro.php" method="post" enctype='multipart/form-data'>
+        <form action="./actionProduto.php" method="post" enctype='multipart/form-data'>
             <div id="cadastro-produto">
                 <label for="descricao">Descrição</label>
                     <input name="descricao" id="descricao" class="campo-cadastro form-control mr-sm-2" type="text" placeholder="Ex. Flauta Doce Yamaha Sopranino">
