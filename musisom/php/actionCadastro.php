@@ -87,7 +87,7 @@
             
 
                 $sql = 'INSERT INTO produtos 
-                VALUES(null, :tipo, :marca, :descricao, :valor, :qtd_estoque, :foto)';
+                VALUES(null, :tipo, :marca, :descricao, format( :valor , 2) , :qtd_estoque, :foto)';
 
                 $stm = $conexao->prepare($sql);
                 $stm->bindValue(':tipo', $tipo);
@@ -107,7 +107,33 @@
                 echo "<meta http-equiv=refresh content='3;URL=index.php'>";
             endif;
 
+            if ($acao == 'excluir'):
 
+                // Captura o nome da foto para excluir da pasta
+                $sql = "SELECT foto FROM produtos WHERE codigo = :id ";
+                $stm = $conexao->prepare($sql);
+                $stm->bindValue(':id', $id);
+                $stm->execute();
+                $produto = $stm->fetch(PDO::FETCH_OBJ);
+    
+                if (!empty($produto) && file_exists('../fotos/'.$produto->foto)):
+                    unlink("../fotos/" . $produto->foto);
+                endif;
+    
+                // Exclui o registro do banco de dados
+                $sql = 'DELETE FROM produtos WHERE codigo = :id';
+                $stm = $conexao->prepare($sql);
+                $stm->bindValue(':id', $id);
+                $retorno = $stm->execute();
+    
+                if ($retorno):
+                    echo "<div class='alert alert-success' role='alert'>Registro excluído com sucesso, aguarde você está sendo redirecionado ...</div> ";
+                else:
+                    echo "<div class='alert alert-danger' role='alert'>Erro ao excluir registro!</div> ";
+                endif;
+    
+                echo "<meta http-equiv=refresh content='3;URL=index.php'>";
+            endif;
 		?>
 </body>
 </html>

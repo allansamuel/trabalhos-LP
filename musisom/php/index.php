@@ -70,12 +70,12 @@ endif;
     <table class="tabelaprodutos table">
         <thead class="tabelaprodutos-head thead-dark">
             <tr>
-            <th id="col1" scope="col"><button class="btn btn-outline-success" type="submit">Selecionar Todos</button></th>
             <th scope="col">Descrição</th>
             <th scope="col">Tipo</th>
             <th scope="col">Marca</th>
-            <th scope="col">Valor</th>
-            <th scope="col">Quantia</th>
+            <th scope="col">Valor Unitário</th>
+            <th scope="col">Estoque</th>
+            <th scope="col">Valor Total</th>
             <th scope="col">Ação</th>
             </tr>
         </thead>
@@ -88,15 +88,16 @@ endif;
                   ?>  
              
             <tr>
-                <th> <input type="checkbox"> </th>
+                
                 <td> <?php echo $produto->descricao ?> </td>
                 <td> <?php echo  $produto->tipo ?> </td>
                 <td> <?php echo  $produto->marca ?> </td>
-                <td> <?php echo  $produto->valor ?> </td>
+                <td> R$ <?php echo  $produto->valor ?> </td>
                 <td> <?php echo  $produto->qtd_estoque ?> </td>
+                <td> R$ <?php echo ($produto->qtd_estoque) * ($produto->valor) ?> </td>
                 <td>
                     <img class="icon" src="../img/pencil.png" />
-                    <img class="icon" src="../img/delete.png" />
+                    <a href='javascript:void(0)' class="btn btn-danger link_exclusao" rel="<?= $produto->codigo;?>"><img class="icon" src="../img/delete.png" /></a>
                     <img class="icon" data-toggle="modal" data-target=".modal.open<?php echo $aux; ?>" src="../img/eye-outline.png"   title="Clique para abrir detalhes"/>
 
 
@@ -130,6 +131,6 @@ endif;
             
         </tbody>
     </table>
-    
+    <script type="text/javascript" src="../js/custom.js"></script>
 </body>
 </html>
