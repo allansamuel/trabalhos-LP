@@ -29,7 +29,8 @@
 		$valor  = (isset($_POST['valor'])) ? $_POST['valor'] : '';
 		$marca  = (isset($_POST['marca'])) ? $_POST['marca'] : '';
 		$qtd_estoque  = (isset($_POST['qtd_estoque'])) ? $_POST['qtd_estoque'] : '';
-		/* $foto	= (isset($_POST['foto'])) ? $_POST['foto'] : ''; */
+        /* $foto	= (isset($_POST['foto'])) ? $_POST['foto'] : ''; */
+        $foto_atual		  = (isset($_POST['foto_atual'])) ? $_POST['foto_atual'] : '';
 
 
         if ($acao != 'excluir'):
@@ -87,7 +88,7 @@
                 
     
                     $sql = 'INSERT INTO produtos 
-                    VALUES(null, :tipo, :marca, :descricao, format( :valor , 2) , :qtd_estoque, format( :total , 2), :foto)';
+                    VALUES(null, :tipo, :marca, :descricao, format( :valor , 2) , :qtd_estoque, :foto)';
     
                     $stm = $conexao->prepare($sql);
                     $stm->bindValue(':tipo', $tipo);
@@ -95,7 +96,6 @@
                     $stm->bindValue(':descricao', $descricao);
                     $stm->bindValue(':valor', $valor);
                     $stm->bindValue(':qtd_estoque', $qtd_estoque);
-                    $stm->bindValue(':total', $qtd_estoque * $valor);
                     $stm->bindValue(':foto', $nome_foto);
                     $retorno = $stm->execute();
     
@@ -107,73 +107,70 @@
     
                     echo "<meta http-equiv=refresh content='3;URL=index.php'>";
                 endif;
-            }
+            
         
 
-            if ($acao == 'editar'):
+                if ($acao == 'editar'):
 
-                if(isset($_FILES['foto']) && $_FILES['foto']['size'] > 0): 
-    
-                    // Verifica se a foto é diferente da padrão, se verdadeiro exclui a foto antiga da pasta
-                    if ($foto_atual <> 'padrao.jpg'):
-                        unlink("fotos/" . $foto_atual);
+                    if(isset($_FILES['foto']) && $_FILES['foto']['size'] > 0): 
+        
+                        // Verifica se a foto é diferente da padrão, se verdadeiro exclui a foto antiga da pasta
+                        if ($foto_atual <> 'padrao.jpg'):
+                            unlink("../fotos/" . $foto_atual);
+                        endif;
+                        $extensoes_aceitas = array('bmp' ,'png', 'svg', 'jpeg', 'jpg');
+                        $extensao = strtolower(end(explode('.', $_FILES['foto']['name'])));
+        
+                        // Validamos se a extensão do arquivo é aceita
+                        if (array_search($extensao, $extensoes_aceitas) === false):
+                        echo "<h1>Extensão Inválida!</h1>";
+                        exit;
+                        endif;
+        
+                        // Verifica se o upload foi enviado via POST   
+                        if(is_uploaded_file($_FILES['foto']['tmp_name'])):  
+                                
+                            // Verifica se o diretório de destino existe, senão existir cria o diretório  
+                            if(!file_exists("../fotos")):  
+                                mkdir("../fotos");  
+                            endif;  
+                    
+                            // Monta o caminho de destino com o nome do arquivo  
+                            $nome_foto = date('dmY') . '_' . $_FILES['foto']['name'];  
+                                
+                            // Essa função move_uploaded_file() copia e verifica se o arquivo enviado foi copiado com sucesso para o destino  
+                            if (!move_uploaded_file($_FILES['foto']['tmp_name'], '../fotos/'.$nome_foto)):  
+                                echo "Houve um erro ao gravar arquivo na pasta de destino!";  
+                            endif;  
+                        endif;
+                    else:
+        
+                        $nome_foto = $foto_atual;
+        
                     endif;
-    
-                    $extensoes_aceitas = array('bmp' ,'png', 'svg', 'jpeg', 'jpg');
-                    $extensao = strtolower(end(explode('.', $_FILES['foto']['name'])));
-    
-                     // Validamos se a extensão do arquivo é aceita
-                    if (array_search($extensao, $extensoes_aceitas) === false):
-                       echo "<h1>Extensão Inválida!</h1>";
-                       exit;
+                    
+                    $sql = 'UPDATE produtos SET tipo=:tipo, marca=:marca, descricao=:descricao, valor= format( :valor , 2 ), qtd_estoque=:qtd_estoque, foto=:foto ';
+                    $sql .= 'WHERE codigo = :id';
+        
+                    $stm = $conexao->prepare($sql);
+                    $stm->bindValue(':tipo', $tipo);
+                    $stm->bindValue(':marca', $marca);
+                    $stm->bindValue(':descricao', $descricao);
+                    $stm->bindValue(':valor', $valor);
+                    $stm->bindValue(':qtd_estoque', $qtd_estoque);
+                    $stm->bindValue(':foto', $nome_foto);
+                    $stm->bindValue(':id', $id);
+                    $retorno = $stm->execute();
+        
+                    if ($retorno):
+                        echo "<div class='alert alert-success' role='alert'>Registro editado com sucesso, aguarde você está sendo redirecionado ...</div> ";
+                    else:
+                        echo "<div class='alert alert-danger' role='alert'>Erro ao editar registro!</div> ";
                     endif;
-     
-                     // Verifica se o upload foi enviado via POST   
-                     if(is_uploaded_file($_FILES['foto']['tmp_name'])):  
-                             
-                          // Verifica se o diretório de destino existe, senão existir cria o diretório  
-                          if(!file_exists("fotos")):  
-                               mkdir("fotos");  
-                          endif;  
-                  
-                          // Monta o caminho de destino com o nome do arquivo  
-                          $nome_foto = date('dmY') . '_' . $_FILES['foto']['name'];  
-                            
-                          // Essa função move_uploaded_file() copia e verifica se o arquivo enviado foi copiado com sucesso para o destino  
-                          if (!move_uploaded_file($_FILES['foto']['tmp_name'], 'fotos/'.$nome_foto)):  
-                               echo "Houve um erro ao gravar arquivo na pasta de destino!";  
-                          endif;  
-                     endif;
-                else:
-    
-                     $nome_foto = $foto_atual;
-    
+        
+                    echo "<meta http-equiv=refresh content='3;URL=index.php'>";
                 endif;
-    
-                $sql = 'UPDATE tab_clientes SET nome=:nome, email=:email, cpf=:cpf, data_nascimento=:data_nascimento, telefone=:telefone, celular=:celular, status=:status, foto=:foto ';
-                $sql .= 'WHERE id = :id';
-    
-                $stm = $conexao->prepare($sql);
-                $stm->bindValue(':nome', $nome);
-                $stm->bindValue(':email', $email);
-                $stm->bindValue(':cpf', $cpf);
-                $stm->bindValue(':data_nascimento', $data_ansi);
-                $stm->bindValue(':telefone', $telefone);
-                $stm->bindValue(':celular', $celular);
-                $stm->bindValue(':status', $status);
-                $stm->bindValue(':foto', $nome_foto);
-                $stm->bindValue(':id', $id);
-                $retorno = $stm->execute();
-    
-                if ($retorno):
-                    echo "<div class='alert alert-success' role='alert'>Registro editado com sucesso, aguarde você está sendo redirecionado ...</div> ";
-                else:
-                    echo "<div class='alert alert-danger' role='alert'>Erro ao editar registro!</div> ";
-                endif;
-    
-                echo "<meta http-equiv=refresh content='3;URL=index.php'>";
-            endif;
-            
+            }
 
             if ($acao == 'excluir'):
 

@@ -94,6 +94,8 @@ endif;
 
 							
 							<input type="hidden" name="acao" value="editar">
+							<input type="hidden" name="id" value="<?=$produto->codigo?>">
+				    		<input type="hidden" name="foto_atual" value="<?=$produto->foto?>">
 						
 					</div>
 					<button class="btn btn-lg btn-block btn-success" type="submit">Editar</button>

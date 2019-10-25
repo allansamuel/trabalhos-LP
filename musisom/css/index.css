@@ -21,7 +21,8 @@ body{
 }
 
 .nav-link{
-    transition: .15s ease-in-out
+    transition: .15s ease-in-out;
+    margin-right: 20px ;
 }
 
 .nav-link:hover{
@@ -77,4 +78,8 @@ body{
 tr{
     align-items: center;
     height: fit-content;
+}
+
+.modal-image{
+    width: 100%;
 }

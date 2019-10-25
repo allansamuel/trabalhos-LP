@@ -1,6 +1,7 @@
 <?php
 require 'conexao.php';
 
+
 // Recebe o termo de pesquisa se existir
 $query = (isset($_GET['sqlquery'])) ? $_GET['sqlquery'] : '';
 
@@ -17,14 +18,16 @@ else:
 
 	// Executa uma consulta baseada no termo de pesquisa passado como parâmetro
 	$conexao = conexao::getInstance();
-	$sql = 'SELECT * FROM produtos WHERE tipo LIKE :tipo OR marca LIKE :marca';
+	$sql = 'SELECT * FROM produtos WHERE tipo LIKE :tipo OR marca LIKE :marca OR descricao LIKE :descricao';
 	$stm = $conexao->prepare($sql);
 	$stm->bindValue(':tipo', $query.'%');
 	$stm->bindValue(':marca', $query.'%');
+	$stm->bindValue(':descricao', $query.'%');
 	$stm->execute();
 	$produtos = $stm->fetchAll(PDO::FETCH_OBJ);
 
 endif;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,6 +56,7 @@ endif;
         <ul class="navbar-nav row justify-content-end">
         
         <li class="nav-item ">
+            <a class="nav-link" href="/trabalhos-LP/musisom/php/cadastroProdutos.php">Exportar Relatório PDF</a>
             <a class="nav-link" href="/trabalhos-LP/musisom/php/cadastroProdutos.php">Cadastrar produto</a>
         </li>
         <li class="nav-item col order-last">
@@ -76,7 +80,6 @@ endif;
             <th scope="col">Marca</th>
             <th scope="col">Valor Unitário</th>
             <th scope="col">Estoque</th>
-            <th scope="col">Valor Total</th>
             <th scope="col">Ação</th>
             </tr>
         </thead>
@@ -95,7 +98,6 @@ endif;
                 <td> <?php echo  $produto->marca ?> </td>
                 <td> R$ <?php echo  $produto->valor ?> </td>
                 <td> <?php echo  $produto->qtd_estoque ?> </td>
-                <td> R$ <?php echo ($produto->valor_total) ?> </td>
                 <td>
                     <a href='editarProdutos.php?id=<?=$produto->codigo?>' class="btn btn-success" ><img class="icon" src="../img/pencil.png" /></a>
                     <a href='javascript:void(0)' class="btn btn-danger link_exclusao" rel="<?= $produto->codigo;?>"><img class="icon" src="../img/delete.png" /></a>
@@ -110,17 +112,18 @@ endif;
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel"><?php echo $produto->descricao ?></h5>
+                        <h5 class="modal-title" id="exampleModalLabel"><?php echo $produto->descricao . ' ( R$' . $produto->valor . ' ) '  ?></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <img src="../fotos/<?php echo $produto->foto ?>" />
+                        <img class="modal-image" src="../fotos/<?php echo $produto->foto ?>" />
+                        <p><?php echo 'Tipo: '.$produto->tipo . ' // Marca: '.$produto->marca ?></p>
                     </div>
                     <div class="modal-footer">
+                        
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                        <button type="button" class="btn btn-primary">Salvar mudanças</button>
                     </div>
                     </div>
                 </div>
