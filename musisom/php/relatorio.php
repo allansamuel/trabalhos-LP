@@ -18,7 +18,7 @@ $obj_pdf->SetFont('dejavusans', '', 12, '', true);
 $obj_pdf->AddPage();  
 
 
-$obj_pdf->Image('../img/logo.png', 15, 10, 50, 13, '', '', '', true, 200, '', false, false, 0, false, false, false);
+$obj_pdf->Image('../img/logo.png', 15, 10, 50, 15, '', '', '', true, 200, '', false, false, 0, false, false, false);
 $txt="PRODUTOS";
 $co="Código";
 $tipo="Tipo";
@@ -29,7 +29,7 @@ $qtd = "Qtde";
 // config de fonte e texto
 $obj_pdf->setTextShadow(array('enabled'=>true, 'depth_w'=>0.2, 'depth_h'=>0.2, 'color'=>array(196,196,196), 'opacity'=>1, 'blend_mode'=>'Normal'));
 //Titulo relatorio
-$obj_pdf->Cell(185, 15,$txt, 1, 1, 'C', 0, '', 0);
+/* $obj_pdf->Cell(185, 15,$txt, 1, 1, 'C', 0, '', 0);
 //Cabeçalho relatorio
 $obj_pdf->MultiCell(25, 5,''.$co, 1, 'C', 1, 0, '', '', true);
 $obj_pdf->MultiCell(35, 5,''.$tipo, 1, 'C', 1, 0, '', '', true);
@@ -43,16 +43,42 @@ $stm = $conexao->prepare($sql);
 $stm->execute();
 $produtos = $stm->fetchAll(PDO::FETCH_OBJ);
 foreach($produtos as $produto){
+    $obj_pdf->setCellHeightRatio(10);
+    $obj_pdf->writeHTMLCell(25, 0, '', '', $produto->codigo, 1, 0, 0, 1, '', 1);
+    $obj_pdf->writeHTMLCell(35, 0, '', '', $produto->tipo, 1, 0, 0, 1, '', 1);
+    $obj_pdf->writeHTMLCell(35, 0, '', '', $produto->marca, 1, 0, 0, 1, '', 1);
+    $obj_pdf->writeHTMLCell(50, 0, '', '', $produto->descricao, 1, 0, 0, 1, '', 1);
+    $obj_pdf->writeHTMLCell(25, 0, '', '', $produto->valor, 1, 0, 0, 1, '', 1);
+    $obj_pdf->writeHTMLCell(15, 0, '', '', $produto->qtd_estoque, 1, 1, 0, 1, '', 1);
     
-    $obj_pdf->writeHTMLCell(25, 0, '', '', $produto->codigo, 1, 0, 0, 1, '', true);
-    $obj_pdf->writeHTMLCell(35, 0, '', '', $produto->tipo, 1, 0, 0, 1, '', true);
-    $obj_pdf->writeHTMLCell(35, 0, '', '', $produto->marca, 1, 0, 0, 1, '', true);
-    $obj_pdf->writeHTMLCell(50, 0, '', '', $produto->descricao, 1, 0, 0, 1, '', true);
-    $obj_pdf->writeHTMLCell(25, 0, '', '', $produto->valor, 1, 0, 0, 1, '', true);
-    $obj_pdf->writeHTMLCell(15, 0, '', '', $produto->qtd_estoque, 1, 1, 0, 1, '', true);
+} */
+$conexao = conexao::getInstance();
+$sql = 'SELECT * FROM produtos';
+$stm = $conexao->prepare($sql);
+$stm->execute();
+$produtos = $stm->fetchAll(PDO::FETCH_OBJ);
+
+$tbl = <<<EOD
+<table  cellspacing="0" cellpadding="1" border="1">
+    <tr>
+        <th colspan="6" align="center">Produtos</th>
+    </tr>
+    <tr>
+        <th>Código</th>
+        <th>Tipo</th>
+        <th>Marca</th>
+        <th>Descrição</th>
+        <th>Valor</th>
+        <th>Qtd</th>
+    </tr>
+    <tr>
+        <td>$produto->codigo</td>
+    </tr>
+    }
     
-}
+</table>
+EOD;
 
 ob_start ();
-
+$obj_pdf->writeHTML($tbl, true, false, false, false, '');
 $obj_pdf->Output('../php/relatorio.pdf','I');
