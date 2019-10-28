@@ -26,38 +26,27 @@ $marca="Marca";
 $desc="Descrição";
 $valor="Valor";
 $qtd = "Qtde";
-// config de fonte e texto
+
 $obj_pdf->setTextShadow(array('enabled'=>true, 'depth_w'=>0.2, 'depth_h'=>0.2, 'color'=>array(196,196,196), 'opacity'=>1, 'blend_mode'=>'Normal'));
-//Titulo relatorio
-/* $obj_pdf->Cell(185, 15,$txt, 1, 1, 'C', 0, '', 0);
-//Cabeçalho relatorio
-$obj_pdf->MultiCell(25, 5,''.$co, 1, 'C', 1, 0, '', '', true);
-$obj_pdf->MultiCell(35, 5,''.$tipo, 1, 'C', 1, 0, '', '', true);
-$obj_pdf->MultiCell(35, 5,''.$marca, 1, 'C', 1, 0, '', '', true);
-$obj_pdf->MultiCell(50, 2,''.$desc, 1, 'C', 1, 0, '', '', true);
-$obj_pdf->MultiCell(25, 5,''.$valor, 1, 'C', 1, 0, '', '', true);
-$obj_pdf->MultiCell(15, 5,''.$qtd, 1, 'C', 1, 1, '', '', true);
-$conexao = conexao::getInstance();
-$sql = 'SELECT * FROM produtos';
-$stm = $conexao->prepare($sql);
-$stm->execute();
-$produtos = $stm->fetchAll(PDO::FETCH_OBJ);
-foreach($produtos as $produto){
-    $obj_pdf->setCellHeightRatio(10);
-    $obj_pdf->writeHTMLCell(25, 0, '', '', $produto->codigo, 1, 0, 0, 1, '', 1);
-    $obj_pdf->writeHTMLCell(35, 0, '', '', $produto->tipo, 1, 0, 0, 1, '', 1);
-    $obj_pdf->writeHTMLCell(35, 0, '', '', $produto->marca, 1, 0, 0, 1, '', 1);
-    $obj_pdf->writeHTMLCell(50, 0, '', '', $produto->descricao, 1, 0, 0, 1, '', 1);
-    $obj_pdf->writeHTMLCell(25, 0, '', '', $produto->valor, 1, 0, 0, 1, '', 1);
-    $obj_pdf->writeHTMLCell(15, 0, '', '', $produto->qtd_estoque, 1, 1, 0, 1, '', 1);
-    
-} */
+
 $conexao = conexao::getInstance();
 $sql = 'SELECT * FROM produtos';
 $stm = $conexao->prepare($sql);
 $stm->execute();
 $produtos = $stm->fetchAll(PDO::FETCH_OBJ);
 
+$tbl_rows = '';
+
+foreach($produtos as $produto){
+    $tbl_rows.= '<tr>';
+    $tbl_rows.= '<td>'.$produto->codigo.'</td>';
+    $tbl_rows.= '<td>'.$produto->tipo.'</td>';
+    $tbl_rows.= '<td>'.$produto->marca.'</td>';
+    $tbl_rows.= '<td>'.$produto->descricao.'</td>';
+    $tbl_rows.= '<td>'.$produto->valor.'</td>';
+    $tbl_rows.= '<td>'.$produto->qtd_estoque.'</td>';
+    $tbl_rows.= '</tr>';
+}
 $tbl = <<<EOD
 <table  cellspacing="0" cellpadding="1" border="1">
     <tr>
@@ -71,10 +60,7 @@ $tbl = <<<EOD
         <th>Valor</th>
         <th>Qtd</th>
     </tr>
-    <tr>
-        <td>$produto->codigo</td>
-    </tr>
-    }
+    $tbl_rows
     
 </table>
 EOD;
