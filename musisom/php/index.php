@@ -56,7 +56,7 @@ endif;
         <ul class="navbar-nav row justify-content-end">
         
         <li class="nav-item ">
-            <a class="nav-link" href="/trabalhos-LP/musisom/php/cadastroProdutos.php">Exportar Relatório PDF</a>
+            <a class="nav-link" href="/trabalhos-LP/musisom/php/relatorio.php">Exportar Relatório PDF</a>
             <a class="nav-link" href="/trabalhos-LP/musisom/php/cadastroProdutos.php">Cadastrar produto</a>
         </li>
         <li class="nav-item col order-last">
