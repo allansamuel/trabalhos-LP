@@ -1,0 +1,11 @@
+nav{
+    height: fit-content;
+}
+.brand-logo{
+    position: relative !important;
+    
+}
+.brand-logo > img{
+    width: 100px;
+    padding-top: 20px;
+}
