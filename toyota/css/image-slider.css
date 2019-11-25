@@ -1,13 +1,13 @@
-/* image slider css */
 /* Authored by Boaz James Otieno */
 
 #slider-main{
     width: 100%;
-    overflow: hidden;;
+    overflow: hidden;
+    height: 400px;
 }
 .img-slide{
     width: 100%;
-    height: 80vh;
+    height: 400px;
     z-index: 5;
     overflow-y: hidden;
 }
@@ -17,9 +17,9 @@
     position: absolute;
     background: transparent;
     border: none;
-    margin-top: 40vh;
+    padding-top: 200px;
     margin-left: 3%;
-    font-size: 60px !important;
+    font-size: 20px !important;
 }
 #next{
     color: #000;
@@ -27,9 +27,8 @@
     z-index: 100;
     background: transparent;
     border: none;
-    margin-top: -60vh;
     margin-left: 93.5%;
-    font-size: 60px !important;
+    font-size: 20px !important;
 }
 .circle{
     border: #ccc 3px solid;
@@ -41,7 +40,7 @@
     cursor: pointer;
 }
 #circles{
-    margin-top: -15vh;
+    margin-top: -30vh;
     margin-left: 48.6%;
     position: absolute;
     z-index: 9000;

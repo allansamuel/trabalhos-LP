@@ -1,11 +1,21 @@
 nav{
     height: fit-content;
 }
-.brand-logo{
-    position: relative !important;
-    
+nav .brand-logo {
+    position: relative;
+    display: flex;
+    align-items: center;
 }
 .brand-logo > img{
-    width: 100px;
-    padding-top: 20px;
+    width: 60px;
+}
+nav .nav-wrapper {
+height: fit-content
+}
+.nav-wrapper .container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px;
 }
