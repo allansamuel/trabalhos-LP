@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/rodape.css">
     <link rel="stylesheet" href="../css/image-slider.css">
     <link href="../css/bootstrap.min.css" rel="stylesheet" />
@@ -70,21 +71,24 @@
                     <div data-u="slides" style="position: absolute; left: 0px; top: 0px; width: 1300px; height: 250px; overflow: hidden; display: flex; align-items: center">
 
                         <div>
-                            <img data-u="image" src="../img/gallery/banner/005.png" />
+                            <img data-u="image" src="https://www.toyota.com.br/wp-content/uploads/2019/05/tiny-RAV4-2019_banner-home-desktop-bg.png" />
                         </div>
                         <div>
-                            <img data-u="image" src="../img/gallery/banner/002.jpg" />
+                            <img data-u="image" src="https://www.toyota.com.br/wp-content/uploads/2019/01/yaris_HB_banner_home_desk-3.jpg"/>
                         </div>
                         <div>
-                            <img data-u="image" src="../img/gallery/banner/001.jpg" />
+                            <img data-u="image" src="https://www.toyota.com.br/wp-content/uploads/2019/09/Corolla-2020_banner_home_desk_bg.png" />
                         </div>
                     </div>
                     <!-- Slides Container End-->
 
                     <!--Logo Begin-->
                     <div data-u="navigator" class="jssorb031" style="display: flex; flex-direction: row; align-items: center; position: absolute;left: 8%;top: 42%;;color: white;" data-autocenter="1" data-scale="0.5" data-scale-bottom="0.75">
-                        <img src="../img/gallery/icons/logo.png" style="width: 2.5em; ">
-                        <h1 id="title">Vinhos da Serra</h1>
+                        <div class="titulo">
+                            <img class="logo-titulo" src="../img/logo-toyota.png" alt="">
+                            <h1 id="title">Promoções Toyota</h1>
+                        </div>
+                        
                     </div>
                     <!--Logo End-->
 
