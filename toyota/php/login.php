@@ -20,17 +20,17 @@
         }
         .fa { color: #fff; }
     </style>
-    <title>Document</title>
+    <title>Ofertas Toyota</title>
 </head>
 <body>
     <!-- navbar -->
     <nav>
         <div class="nav-wrapper white">
             <div class="container">
-                <a href="#" class="brand-logo grey-text"> <img src="../img/logo.png" alt=""> </a>
+                <a href="./index.php" class="brand-logo grey-text"> <img src="../img/logo.png" alt=""> </a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a class="grey-text" href="./index.php#container-menu"> <h6>Sobre</h6></a></li>
-                <li><a class="grey-text" href="#container-menu"><h6>Promoções</h6></a></li>
+                <li><a class="grey-text" href="./index.php#sobre"> <h6>Sobre</h6></a></li>
+                <li><a class="grey-text" href="./index.php#ofertas"><h6>Ofertas</h6></a></li>
                 <li><a class="grey-text" href="./login.php"><h6>Entrar</h6></a></li>
                 <li><a class="grey-text" href="./cadastro.php"><h6>Cadastrar</h6></a></li>
                 </ul>
@@ -41,7 +41,7 @@
 
     <div class="row container">
         <div class="container">
-            <h3>Acesse em sua conta</h3>
+            <h3>Acesse sua conta</h3>
             <form class="col s12">
             <div class="row">
                 <div class="input-field col s12">

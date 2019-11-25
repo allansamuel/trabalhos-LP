@@ -12,27 +12,30 @@
     <link href="../css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato" />
+    <link href='https://fonts.googleapis.com/css?family=Archivo Black' rel='stylesheet'>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
     
     <style>
         body{
             font-family: Lato;
         }
+        
         .fa { color: #fff; }
     </style>
-    <title>Document</title>
+    <title>Ofertas Toyota</title>
 </head>
 <body>
     <!-- navbar -->
     <nav>
         <div class="nav-wrapper white">
             <div class="container">
-                <a href="#" class="brand-logo grey-text"> <img src="../img/logo.png" alt=""> </a>
+                <a href="./index.php" class="brand-logo grey-text"> <img src="../img/logo.png" alt=""> </a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a class="grey-text" href="#container-menu"> <h6>Sobre</h6></a></li>
-                <li><a class="grey-text" href="#container-menu"><h6>Promoções</h6></a></li>
+                <li><a class="grey-text" href="./index.php#sobre"> <h6>Sobre</h6></a></li>
+                <li><a class="grey-text" href="./index.php#ofertas"><h6>Ofertas</h6></a></li>
                 <li><a class="grey-text" href="./login.php"><h6>Entrar</h6></a></li>
-                <li><a class="grey-text" href="portfolio.html"><h6>Cadastrar</h6></a></li>
+                <li><a class="grey-text" href="./cadastro.php"><h6>Cadastrar</h6></a></li>
                 </ul>
             </div>
         </div>
@@ -104,16 +107,45 @@
     </div>
 
     <div id="conteudo">
-        <div class="container" id="container-menu">
-            <div>
-                <img src="../img/hilux.png" alt="">
+        
+        <div class="container row" id="sobre">
+            <div class="col s6">
+                <h3>SEGURANÇA, CONFORTO E DESEMPENHO.</h3>
+                <h6>Encontre o Toyota que combina com você.</h6>
+                <br>
+                
+                <img src="../img/carros-toyota.png" alt="">
             </div>
-            
+            <div class="sobre-2 col s6">
+                <div class="promocoes">
+                    <h3>CONFIRA NOSSOS LANÇAMENTOS</h3>
+                    <hr>
+                    <h6>Conheça toda a linha Toyota e escolha o seu próximo carro. Acesse o nosso site oficial.</h6>
+                    <h6>Assistência 24H</h6>
+                    <a href="https://toyota.com.br"> <button id="login-button" type="button" class="waves-effect waves-light btn col s12">Ir para o site</button></a>
+                </div>
+                
+            </div>
+            <img class="corolla-alpha" src="../img/corolla.png" alt="">
         </div>
-        <div>
+        
+        <div id="ofertas">
+            <div id="showcase-hilux">
+                    <div class="showcase container">
+                        <div class="col s6">
+                            <img src="../img/hilux.png" class="animated-hilux">
+                        </div>
+                        <div class="col s6">
+                            <h4 id="oferta-titulo">INSCREVA-SE E CONCORRA A UMA HILUX CABINE DUPLA</h4>
+                        </div>
+                        
+                        
+                    </div>
+            </div>
             <img src="https://www.toyota.com.br/wp-content/uploads/2015/11/tyt-hilux-simples-2016-banner-top.jpg" >
         </div>
     </div>
+    
 
     <div id="rodape">
             <div class="rodape-box" style="width: 25%;">
@@ -129,7 +161,7 @@
                     
                     <h3>Atendimento</h3>
                 </div>
-                <p>Toyota - CNPJ: 00.000.000/0000-00<br>R. Lorem ipsum dolor, 123 - Bairro Lorem ipsum - Gramado - RS - Brasil</p>
+                <p>Toyota - CNPJ: 00.000.000/0000-00<br>R. Lorem ipsum dolor, 123 - Bairro Lorem ipsum - Lorem - LI - Brasil</p>
                 <ul>
                     <li style="display: flex; flex-direction: row; flex-wrap: wrap">
                         <div style="display: flex; flex-direction: row; margin-right: 4.2%;">
@@ -174,16 +206,14 @@
     <script src="../js/jquery-1.9.1.min.js"></script>
     <script src="bootstrap.min.js"></script>
     <script src="docs.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="ie10-viewport-bug-workaround.js"></script>
 
-    <!-- jssor slider scripts-->
     <script type="text/javascript" src="../js/jssor.slider.min.js"></script>
     <script>
         jQuery(document).ready(function($) {
 
             var options = {
-                $FillMode: 2, //[Optional] The way to fill image in slide, 0 stretch, 1 contain (keep aspect ratio and put all inside slide), 2 cover (keep aspect ratio and cover whole slide), 4 actual size, 5 contain for large image, actual size for small image, default value is 0
+                $FillMode: 2, 
                 $AutoPlay: 1, //[Optional] Auto play or not, to enable slideshow, this option must be set to greater than 0. Default value is 0. 0: no auto play, 1: continuously, 2: stop at last slide, 4: stop on click, 8: stop on user navigation (by arrow/bullet/thumbnail/drag/arrow key navigation)
                 $Idle: 4000, //[Optional] Interval (in milliseconds) to go for next slide since the previous stopped if the slider is auto playing, default value is 3000
                 $PauseOnHover: 1, //[Optional] Whether to pause when mouse over if a slider is auto playing, 0 no pause, 1 pause for desktop, 2 pause for touch device, 3 pause for desktop and touch device, 4 freeze for desktop, 8 freeze for touch device, 12 freeze for desktop and touch device, default value is 1
@@ -231,6 +261,7 @@
             //responsive code end
         });
     </script>
+    
 </body>
 
 </html>

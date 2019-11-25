@@ -1,4 +1,33 @@
-
+#sobre{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.sobre-2{
+    display: flex;
+    overflow: hidden;
+    padding:  15px !important;
+}
+.promocoes{
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    width:100%;
+    background-image: linear-gradient(rgb(55, 59, 75), rgb(12, 12, 26));
+    opacity: 0.6;
+    transition: 0.3s;
+    padding: 25px;
+}
+.promocoes:hover{
+    opacity: .85;
+}
+.promocoes h6{
+    text-align: right;
+}
+.promocoes hr{
+    width: 90%;
+}
 .logo-titulo{
     width: 25%;
     display: flex;
@@ -9,8 +38,47 @@
 #conteudo{
     width: 100%;
     height: fit-content;
-
+    overflow: hidden;
 }
-.container-menu{
+#oferta{
+    width: 100%;
+}
+.corolla-alpha{
     
+    position: absolute;
+    right: -200px;
+    width: 60%;
+    opacity: .15;
+    transform: rotate(-6deg);
+}
+
+#showcase-hilux{
+    width: 100%;
+    height: fit-content;
+    background-image: linear-gradient(rgb(38, 75, 88), rgb(23, 20, 31));
+}
+#oferta-titulo{
+    font-family: archivo black;
+    color: white;
+    text-align: center;
+    padding-top: 20px;
+    text-align: right;
+}
+#sobre h3,h4{
+    font-family: archivo black;
+}
+
+.animated-hilux{
+    opacity: 1;
+    transition: 0.3s;
+    width: 100%;
+}
+
+.animated-hilux:hover{
+    width: 140%;
+}
+
+.showcase.container{
+    display: flex;
+    flex-direction: row;
 }
