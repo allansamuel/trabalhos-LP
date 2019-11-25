@@ -1,0 +1,16 @@
+.btn{
+    width: 100%;
+}
+.row{
+    display: flex;
+    justify-content: space-between;
+}
+.row .col {
+    display: flex;
+    flex-direction: column;
+    
+    padding: 0;
+}
+.row .col.s6{
+    width: 48%;
+}

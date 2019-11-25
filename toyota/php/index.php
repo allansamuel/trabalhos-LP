@@ -29,8 +29,10 @@
             <div class="container">
                 <a href="#" class="brand-logo grey-text"> <img src="../img/logo.png" alt=""> </a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a class="grey-text large-text" href="../index.html"> <h6>Sobre</h6></a></li>
-                <li><a class="grey-text" href="portfolio.html"><h6>Promoções</h6></a></li>
+                <li><a class="grey-text" href="#container-menu"> <h6>Sobre</h6></a></li>
+                <li><a class="grey-text" href="#container-menu"><h6>Promoções</h6></a></li>
+                <li><a class="grey-text" href="./login.php"><h6>Entrar</h6></a></li>
+                <li><a class="grey-text" href="portfolio.html"><h6>Cadastrar</h6></a></li>
                 </ul>
             </div>
         </div>
@@ -58,53 +60,61 @@
                             transform: rotate(360deg);
                         }
                     }
-                </style>
-                <div id="slider1_container" style="visibility: hidden; position: relative; margin: 0 auto;
-        top: 0px; left: 0px; width: 1300px; height: 250px; overflow: hidden;">
-                    <!-- Loading Screen -->
-                    <div data-u="loading" class="jssorl-009-spin" style="position:absolute;top:0px;left:0px;width:100%;height:100%;text-align:center;background-color:rgba(0,0,0,0.7);">
+        </style>
+        <div id="slider1_container" style="visibility: hidden; position: relative; margin: 0 auto; top: 0px; left: 0px; width: 1300px; height: 250px; overflow: hidden;">
+            <!-- Loading Screen -->
+            <div data-u="loading" class="jssorl-009-spin" style="position:absolute;top:0px;left:0px;width:100%;height:100%;text-align:center;background-color:rgba(0,0,0,0.7);">
 
-                        <img style="margin-top:-19px;position:relative;top:50%;width:38px;height:38px;" src="../svg/loading/static-svg/spin.svg" />
-                    </div>
+                <img style="margin-top:-19px;position:relative;top:50%;width:38px;height:38px;" src="../svg/loading/static-svg/spin.svg" />
+            </div>
 
-                    <!-- Slides Container Begin-->
-                    <div data-u="slides" style="position: absolute; left: 0px; top: 0px; width: 1300px; height: 250px; overflow: hidden; display: flex; align-items: center">
+            <!-- Slides Container Begin-->
+            <div data-u="slides" style="position: absolute; left: 0px; top: 0px; width: 1300px; height: 250px; overflow: hidden; display: flex; align-items: center">
 
-                        <div>
-                            <img data-u="image" src="https://www.toyota.com.br/wp-content/uploads/2019/05/tiny-RAV4-2019_banner-home-desktop-bg.png" />
-                        </div>
-                        <div>
-                            <img data-u="image" src="https://www.toyota.com.br/wp-content/uploads/2019/01/yaris_HB_banner_home_desk-3.jpg"/>
-                        </div>
-                        <div>
-                            <img data-u="image" src="https://www.toyota.com.br/wp-content/uploads/2019/09/Corolla-2020_banner_home_desk_bg.png" />
-                        </div>
-                    </div>
-                    <!-- Slides Container End-->
-
-                    <!--Logo Begin-->
-                    <div data-u="navigator" class="jssorb031" style="display: flex; flex-direction: row; align-items: center; position: absolute;left: 8%;top: 42%;;color: white;" data-autocenter="1" data-scale="0.5" data-scale-bottom="0.75">
-                        <div class="titulo">
-                            <img class="logo-titulo" src="../img/logo-toyota.png" alt="">
-                            <h1 id="title">Promoções Toyota</h1>
-                        </div>
-                        
-                    </div>
-                    <!--Logo End-->
-
-                    <!--Bullet Navigator Begin -->
-                    <div data-u="navigator" class="jssorb031" style="position:absolute;bottom:12px;right:12px;" data-autocenter="1" data-scale="0.5" data-scale-bottom="0.75">
-                        <div data-u="prototype" class="i" style="width:16px;height:16px;">
-                            <svg viewBox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
-                        <circle class="b" cx="8000" cy="8000" r="5800"></circle>
-                    </svg>
-                        </div>
-                    </div>
-                    <!--Bullet Navigator End -->
-
+                <div>
+                    <img data-u="image" src="https://www.toyota.com.br/wp-content/uploads/2019/05/tiny-RAV4-2019_banner-home-desktop-bg.png" />
+                </div>
+                <div>
+                    <img data-u="image" src="https://www.toyota.com.br/wp-content/uploads/2019/01/yaris_HB_banner_home_desk-3.jpg"/>
+                </div>
+                <div>
+                    <img data-u="image" src="https://www.toyota.com.br/wp-content/uploads/2019/09/Corolla-2020_banner_home_desk_bg.png" />
                 </div>
             </div>
-  
+            <!-- Slides Container End-->
+
+            <!--Logo Begin-->
+            <div data-u="navigator" class="jssorb031" style="display: flex; flex-direction: row; align-items: center; position: absolute;left: 16%;top: 42%;;color: white;" data-autocenter="1" data-scale="0.5" data-scale-bottom="0.75">
+                    <img class="logo-titulo" src="../img/titulo-toyota.png" alt="">
+                
+            </div>
+            <!--Logo End-->
+
+            <!--Bullet Navigator Begin -->
+            <div data-u="navigator" class="jssorb031" style="position:absolute;bottom:12px;right:12px;" data-autocenter="1" data-scale="0.5" data-scale-bottom="0.75">
+                <div data-u="prototype" class="i" style="width:16px;height:16px;">
+                    <svg viewBox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+                <circle class="b" cx="8000" cy="8000" r="5800"></circle>
+            </svg>
+                </div>
+            </div>
+            <!--Bullet Navigator End -->
+
+        </div>
+    </div>
+
+    <div id="conteudo">
+        <div class="container" id="container-menu">
+            <div>
+                <img src="../img/hilux.png" alt="">
+            </div>
+            
+        </div>
+        <div>
+            <img src="https://www.toyota.com.br/wp-content/uploads/2015/11/tyt-hilux-simples-2016-banner-top.jpg" >
+        </div>
+    </div>
+
     <div id="rodape">
             <div class="rodape-box" style="width: 25%;">
                 <div class="arrow_title">
