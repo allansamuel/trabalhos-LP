@@ -1,1 +1,1 @@
-![teste](/img/home-fullview.png)
+![teste](./img/home-fullview.png)
