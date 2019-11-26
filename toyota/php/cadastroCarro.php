@@ -51,38 +51,56 @@
     </nav>
     <!-- navbar -->
 
+    <?php
+
+        $acao  = (isset($_POST['acao'])) ? $_POST['acao'] : '';
+
+        if(trim($_POST['carro']) == "nao"){
+            session_start(); 
+            $_SESSION['acao'] = (isset($_POST['acao'])) ? $_POST['acao'] : '';
+            $_SESSION['nome'] = (isset($_POST['nome'])) ? $_POST['nome'] : '';
+            $_SESSION['email'] = (isset($_POST['email'])) ? $_POST['email'] : '';
+            $_SESSION['endereco'] = (isset($_POST['endereco'])) ? $_POST['endereco'] : '';
+            $_SESSION['senha'] = (isset($_POST['password'])) ? $_POST['password'] : '';
+            $_SESSION['telefone'] = (isset($_POST['telefone'])) ? $_POST['telefone'] : '';
+            $_SESSION['carro'] = (isset($_POST['carro'])) ? $_POST['carro'] : '';
+            header("Location: ./actionCliente.php");
+        }else{
+    ?>
     <div class="row container">
         <div class="container">
             <h3>Inscreva-se e garanta sua participação na nossa oferta Hilux</h3>
-            <form class="col s12" action="./actionCliente.php">
-            <div class="row">
-                <div class="input-field col s12">
-                    <input id="email" type="email" class="validate">
-                    <label for="email">Marca</label>
+            <form class="col s12" action="./actionCliente.php" method="post">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="marca" name="marca" type="text" class="validate">
+                        <label for="marca">Marca</label>
+                    </div>
+                    
                 </div>
-                
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <input id="password" type="password" class="validate">
-                    <label for="password">Modelo</label>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="modelo" name="modelo" type="text" class="validate">
+                        <label for="modelo">Modelo</label>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <input id="password" type="password" class="validate">
-                    <label for="password">Ano</label>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="ano" value="<?php echo date("Y"); ?>" name="ano" type="number" min="1900" max="9999" class="validate">
+                        <label for="ano">Ano</label>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                    <button id="login-button" type="button" class="waves-effect waves-light btn col s12">CADASTRAR</button>
-                
-            </div>
-        </form>
+                <input type="hidden" name="carro" value="sim">
+                <div class="row">
+                    <button id="login-button" type="submit" class="waves-effect btn col s12">CADASTRAR</button>
+                </div>
+            </form>
         </div>
     
     </div>
-   
+   <?php
+        }
+   ?>
 </body>
 
 </html>

@@ -53,46 +53,48 @@
     <div class="row container">
         <div class="container">
             <h3>Inscreva-se e garanta sua participação na nossa oferta Hilux</h3>
-            <form class="col s12" action="./cadastroCarro.php">
-            <div class="row">
-                <div class="input-field col s6">
-                    <input id="email" type="email" class="validate">
-                    <label for="email">Nome</label>
+            <form class="col s12" action="./cadastroCarro.php" method="post">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="nome" name="nome" type="text" class="validate" required>
+                        <label for="nome">Nome</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input placeholder="DDD+Telefone" id="telefone" name="telefone" type="number" class="validate" required>
+                        <label for="telefone">Telefone</label>
+                    </div>
                 </div>
-                <div class="input-field col s6">
-                    <input id="password" type="password" class="validate">
-                    <label for="password">Telefone</label>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="email" name="email" type="email" class="validate" required>
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="password" name="password" type="password" class="validate" required>
+                        <label for="password">Senha</label>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s6">
-                    <input id="password" type="password" class="validate">
-                    <label for="password">Email</label>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="endereco" name="endereco" type="text" class="validate" required>
+                        <label for="endereco">Endereço</label>
+                    </div>
+                    <div class="input-field col s6">
+                        
+                        <select name="carro" required>
+                        <option value="sim">Sim</option>
+                        <option value="nao">Não</option>
+                        
+                        </select>
+                        <label >Possui Carro?</label>
+                    </div>
                 </div>
-                <div class="input-field col s6">
-                    <input id="password" type="password" class="validate">
-                    <label for="password">Senha</label>
+                <input type="hidden" name="acao" value="incluir">
+                <div class="row">
+                    
+                    <button id="login-button" type="submit" class="waves-effect btn col s12">CADASTRAR</button>
+                    
                 </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s6">
-                    <input id="password" type="password" class="validate">
-                    <label for="password">Endereço</label>
-                </div>
-                <div class="input-field col s6">
-                    <select>
-                    <option value="" disabled selected>Possui carro?</option>
-                    <option value="sim">Sim</option>
-                    <option value="nao">Não</option>
-                    </select>
-                </div>
-            </div>
-            <input type="hidden" name="acao" value="incluir">
-            <div class="row">
-                
-                    <button id="login-button" type="button" class="waves-effect waves-light btn col s12">CADASTRAR</button>
-                
-            </div>
         </form>
         </div>
     
