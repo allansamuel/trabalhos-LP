@@ -30,10 +30,10 @@
     require './conexao.php';
 
     session_start(); 
-    $admin  = $_SESSION['admin'];
-    $senha  =  $_SESSION['senha'];
-    $email  = $_SESSION['email'];
-    $user = $_SESSION['user'];
+    $admin  = (isset($_SESSION['admin'])) ? $_SESSION['admin']  : false;
+    $senha  =  (isset($_SESSION['senha'])) ? $_SESSION['senha']  : '';
+    $email  = (isset($_SESSION['email'])) ? $_SESSION['email']  : '';;
+    $user = (isset($_SESSION['user'])) ? $_SESSION['user']  : '';
     ?>
     <!-- navbar -->
     <nav>
@@ -41,22 +41,29 @@
             <div class="container">
                 <a href="./index.php" class="brand-logo grey-text"> <img src="../img/logo.png" alt=""> </a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a class="grey-text" href="./index.php#sobre"> <h6>Sobre</h6></a></li>
-                <li><a class="grey-text" href="./index.php#ofertas"><h6>Ofertas</h6></a></li>
+                <li><a class="grey-text" href="./index.php#sobre"> Sobre</a></li>
+                <li><a class="grey-text" href="./index.php#ofertas">Ofertas</a></li>
                 <?php
                 if(!empty($user)){
                     
                     if($admin === true){
-                        echo '<li><a class="grey-text" href="./restrito.php"><h6>Restrito</h6></a></li>';
+                        echo '<ul id="dropdown1" class="dropdown-content">
+                        <li><a href="./restrito/admin.php">Admin</a></li>
+                        <li><a href="./restrito/clientes.php">Clientes</a></li>
+                      </ul>';
+                        echo '<li><a class="dropdown-trigger grey-text" data-target="dropdown1">Logado como Admin</a></li>';
+                    }else{
+                        echo '<li class="grey-text"> <b>Status: Inscrito</b> </li>';
                     }
-                    echo '<li><a class="grey-text" href="./logout.php"><h6>Sair</h6></a></li>';
+                    echo '<li><a class="grey-text" href="./logout.php">Sair</a></li>';
                 }
                 
                 if(empty($user)){
-                    echo '<li><a class="grey-text" href="./login.php"><h6>Entrar</h6></a></li>';
+                    
                     if($admin === false){
-                        echo '<li><a class="grey-text" href="./cadastro.php"><h6>Cadastrar</h6></a></li>';
+                        echo '<li><a class="grey-text" href="./cadastro.php">Cadastrar</a></li>';
                     }
+                    echo '<li><a class="grey-text" href="./login.php">Entrar</a></li>';
                 }
                 ?>
                 </ul>
@@ -168,7 +175,7 @@
                 <div class="titulo-sobreposto-oferta">
                 <h4>Não perca a oportunidade</h4>
                 <iframe width="480" height="260" src="https://www.youtube.com/embed/SOYVJjrW79c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                <p>O sorteio será realizado dia XX de Dezembro. <a href="./cadastro.php">Saiba mais</a> </p> 
+                <p>O sorteio será realizado dia 25 de Dezembro. <a href="./cadastro.php">Saiba mais</a> </p> 
                 </div>
             <img id="hilux-bg" src="https://www.toyota.com.br/wp-content/uploads/2015/11/tyt-hilux-simples-2016-banner-top.jpg" >
             </div>
@@ -234,12 +241,14 @@
             <p style="margin-left: 2%; margin-block-end: 0;">Site desenvolvido por Allan Samuel Gomes Rodrigues (3i)</p>
         </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="../js/jquery-1.9.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="bootstrap.min.js"></script>
     <script src="docs.min.js"></script>
     <script src="ie10-viewport-bug-workaround.js"></script>
-
+    <script type="text/javascript" >
+        $('.dropdown-trigger').dropdown();
+    </script>
     <script type="text/javascript" src="../js/jssor.slider.min.js"></script>
     <script>
         jQuery(document).ready(function($) {

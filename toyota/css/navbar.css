@@ -19,3 +19,8 @@ height: fit-content
     align-items: center;
     padding: 6px;
 }
+.sub-nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
