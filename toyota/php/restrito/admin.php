@@ -77,6 +77,7 @@
 
     <div class="container admin">
     <h4>Administradores</h4>
+    <a href="./cadastroAdmin.php"><button class="btn waves-effect">Cadastrar novo Administrador</button></a> 
     <table class="tabela-admin table">
         <thead class="tabela-admin">
             <tr>

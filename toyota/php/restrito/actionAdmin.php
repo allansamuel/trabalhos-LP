@@ -14,50 +14,57 @@
 <body>
 	<div class='container box-mensagem-crud'>
 		<?php 
-		require 'conexao.php';
+		require '../conexao.php';
 
 		
 		$conexao = conexao::getInstance();
 
         
         $mensagem = '';
-        session_start(); 
-        $email = (isset($_POST['passwordConfAdmin'])) ? 
-        $carro  = (isset($_POST['carro'])) ? (isset($_POST['carro']))  : $_SESSION['carro'];
-		$marca = (isset($_POST['marca'])) ? $_POST['marca'] : '';
-		$modelo = (isset($_POST['modelo'])) ? $_POST['modelo'] : '';
-		$ano = (isset($_POST['ano'])) ? $_POST['ano'] : '';
+        $acao  = (isset($_POST['acao'])) ? $_POST['acao']  : '';
+        $senhaConf = (isset($_POST['passwordConfAdmin'])) ? $_POST['passwordConfAdmin'] : '';
+        $email  = (isset($_POST['emailAdmin'])) ? $_POST['emailAdmin']  : '';
+        $senha = (isset($_POST['passwordAdmin'])) ? $_POST['passwordAdmin'] : '';
+        $dataCad = date("Y-m-d");
 
 
         if ($acao != 'excluir'):
-			if ($nome == '' || strlen($nome) < 3):
-				$mensagem .= '<li>Favor preencher Nome</li>';
-		    endif;
-			if ($telefone == '' || strlen($telefone) < 11):
-				$mensagem .= '<li>Favor preencher Telefone com DDD</li>';
-		    endif;
-			if ($email == '' || strlen($email) < 3):
-				$mensagem .= '<li>Favor preencher Email</li>';
-		    endif;
-			if ($senha == '' || strlen($senha) < 3):
-				$mensagem .= '<li>Favor preencher Senha</li>';
-		    endif;
-			if ($carro == 'sim' ){
-                if($marca == '' || strlen($marca) < 3){
-                    $mensagem .= '<li>Favor preencher Marca do seu veículo</li>';
-                }
-                if($modelo == '' || strlen($modelo) < 3){
-                    $mensagem .= '<li>Favor preencher Modelo do seu veículo</li>';
-                }
-                if($ano == '' || strlen($ano) < 4){
-                    $mensagem .= '<li>Favor informar Ano do seu veículo</li>';
+            //verificando se existe usuario com o email, ja que existem 2 tabelas.
+            $sql = 'SELECT * FROM toyota.cadastro where email=:email';
+            
+            $stm = $conexao->prepare($sql);
+            $stm->bindValue(':email', $email);
+            $stm->execute();
+            $confirmaUsuarioCli = $stm->fetchAll(PDO::FETCH_OBJ);
+
+            if(!empty($confirmaUsuarioCli)){
+                $mensagem .= "<li>Já existe um usuário com esse email.</li>";
+            }else{
+                $sql = 'SELECT * FROM toyota.login where usuario=:email';
+            
+                $stm = $conexao->prepare($sql);
+                $stm->bindValue(':email', $email);
+                $stm->execute();
+                $confirmaUsuarioAdm = $stm->fetchAll(PDO::FETCH_OBJ);
+                if(!empty($confirmaUsuarioAdm)){
+                    $mensagem .= "<li>Já existe um usuário com esse email.</li>";
+                }else{
+
+                    if ($email == '' || strlen($email) < 3):
+                        $mensagem .= '<li>Email inválido</li>';
+                    endif;
+                    if ($senha == '' || strlen($senha) < 3):
+                        $mensagem .= '<li>Senha inválida</li>';
+                    endif;
+                    if ($senha !== $senhaConf):
+                        $mensagem .= '<li>As senhas não condizem</li>';
+                    endif;
+                    
                 }
             }
-				
-
             if ($mensagem != ''){
                 $mensagem = '<ul>' . $mensagem . '</ul>';
-				echo "<div class='alert alert-danger' role='alert'>".$mensagem."</div> ";
+                echo "<div class='alert alert-danger' role='alert'>".$mensagem."</div> ";
             }
         endif;
 
@@ -66,27 +73,22 @@
             if($mensagem == ''){
                 if ($acao == 'incluir'):
     
-                    $sql = 'INSERT INTO cadastro 
-                    VALUES(null, :nome, :telefone, :email, :senha, :carro, :marca, :modelo, :ano)';
+                    $sql = 'INSERT INTO login 
+                    VALUES(:email, :senha, :data_cad)';
     
                     $stm = $conexao->prepare($sql);
-                    $stm->bindValue(':nome', $nome);
-                    $stm->bindValue(':telefone', $telefone);
                     $stm->bindValue(':email', $email);
                     $stm->bindValue(':senha', $senha);
-                    $stm->bindValue(':carro', $carro);
-                    $stm->bindValue(':marca', $marca);
-                    $stm->bindValue(':modelo', $modelo);
-                    $stm->bindValue(':ano', $ano);
+                    $stm->bindValue(':data_cad', $dataCad);
                     $retorno = $stm->execute();
     
                     if ($retorno):
-                        echo "<div class='alert alert-success' role='alert'>Inscrição concluída! Aguarde o resultado e boa sorte!</div> ";
+                        echo "<div class='alert alert-success' role='alert'>Administrador cadastrado com sucesso.</div> ";
                     else:
                         echo "<div class='alert alert-danger' role='alert'>Erro ao inserir registro!</div> ";
                     endif;
     
-                    echo "<meta http-equiv=refresh content='3;URL=index.php'>";
+                    echo "<meta http-equiv=refresh content='3;URL=./admin.php'>";
                 endif;
             
         

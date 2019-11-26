@@ -39,36 +39,46 @@
             $stm = $conexao->prepare($sql);
             $stm->bindValue(':email', $email);
             $stm->execute();
-            $confirmaUsuario = $stm->fetchAll(PDO::FETCH_OBJ);
+            $confirmaUsuarioAdm = $stm->fetchAll(PDO::FETCH_OBJ);
 
-            if(!empty($confirmaUsuario)){
+            if(!empty($confirmaUsuarioAdm)){
                 $mensagem .= "<li>Já existe um usuário com esse email.</li>";
             }else{
-                if ($nome == '' || strlen($nome) < 3):
-                    $mensagem .= '<li>Favor preencher Nome</li>';
-                endif;
-                if ($telefone == '' || strlen($telefone) < 11):
-                    $mensagem .= '<li>Favor preencher Telefone com DDD</li>';
-                endif;
-                if (($email == '' || strlen($email) < 3)):
-                    $mensagem .= '<li>Email inválido</li>';
-                endif;
-                if ($senha == '' || strlen($senha) < 3):
-                    $mensagem .= '<li>Senha inválida</li>';
-                endif;
-                if ($carro == 'sim' ){
-                    if($marca == '' || strlen($marca) < 3){
-                        $mensagem .= '<li>Favor preencher Marca do seu veículo</li>';
-                    }
-                    if($modelo == '' || strlen($modelo) < 3){
-                        $mensagem .= '<li>Favor preencher Modelo do seu veículo</li>';
-                    }
-                    if($ano == '' || strlen($ano) < 4){
-                        $mensagem .= '<li>Favor informar Ano do seu veículo</li>';
-                    }
-                }
-            }	
+                $sql = 'SELECT * FROM toyota.cadastro where email=:email';
+            
+                $stm = $conexao->prepare($sql);
+                $stm->bindValue(':email', $email);
+                $stm->execute();
+                $confirmaUsuarioCli = $stm->fetchAll(PDO::FETCH_OBJ);
 
+                if(!empty($confirmaUsuarioCli)){
+                    $mensagem .= "<li>Já existe um usuário com esse email.</li>";
+                }else{
+                    if ($nome == '' || strlen($nome) < 3):
+                        $mensagem .= '<li>Favor preencher Nome</li>';
+                    endif;
+                    if ($telefone == '' || strlen($telefone) < 11):
+                        $mensagem .= '<li>Favor preencher Telefone com DDD</li>';
+                    endif;
+                    if (($email == '' || strlen($email) < 3)):
+                        $mensagem .= '<li>Email inválido</li>';
+                    endif;
+                    if ($senha == '' || strlen($senha) < 3):
+                        $mensagem .= '<li>Senha inválida</li>';
+                    endif;
+                    if ($carro == 'sim' ){
+                        if($marca == '' || strlen($marca) < 3){
+                            $mensagem .= '<li>Favor preencher Marca do seu veículo</li>';
+                        }
+                        if($modelo == '' || strlen($modelo) < 3){
+                            $mensagem .= '<li>Favor preencher Modelo do seu veículo</li>';
+                        }
+                        if($ano == '' || strlen($ano) < 4){
+                            $mensagem .= '<li>Favor informar Ano do seu veículo</li>';
+                        }
+                    }
+                }	
+            }
             if ($mensagem != ''){
                 $mensagem = '<ul>' . $mensagem . '</ul>';
 				echo "<div class='alert alert-danger' role='alert'>".$mensagem."</div> ";

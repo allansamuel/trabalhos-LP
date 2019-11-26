@@ -44,7 +44,7 @@
     $email  = (isset($_SESSION['email'])) ? $_SESSION['email']  : '';;
     $user = (isset($_SESSION['user'])) ? $_SESSION['user']  : '';
     if(empty($user) or $admin === false){
-        header("Location: ./index.php");
+        header("Location: ../index.php");
     }else{
     ?>
     <nav class="nav-extended">
