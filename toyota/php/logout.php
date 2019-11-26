@@ -1,3 +1,4 @@
+
 <?php
     session_start(); 
     $admin  = $_SESSION['admin'];
@@ -12,3 +13,5 @@
         $_SESSION['user'] = null;
         header("Location: ./index.php");   
     }
+
+    ?>
