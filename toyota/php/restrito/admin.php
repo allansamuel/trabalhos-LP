@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="../../css/navbar.css">
     <link rel="stylesheet" href="../../css/index.css">
+    <link rel="stylesheet" href="../../css/admin.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato" />
     <link href='https://fonts.googleapis.com/css?family=Archivo Black' rel='stylesheet'>
@@ -54,16 +55,16 @@
                         echo '<ul id="dropdown1" class="dropdown-content">
                         <li><a href="./admin.php">Admin</a></li>
                         <li><a href="./clientes.php">Clientes</a></li>
-                      </ul>';
+                        </ul>';
                         echo '<li><a class="dropdown-trigger red-text text-darken-2" href="#!" data-target="dropdown1">Logado como Admin</a></li>';
                     }
-                    echo '<li><a class="red-text text-darken-2" href="./logout.php">Sair</a></li>';
+                    echo '<li><a class="red-text text-darken-2" href="../logout.php">Sair</a></li>';
                 }
                 
                 if(empty($user)){
-                    echo '<li><a class="red-text text-darken-2" href="./login.php">Entrar</a></li>';
+                    echo '<li><a class="red-text text-darken-2" href="../login.php">Entrar</a></li>';
                     if($admin === false){
-                        echo '<li><a class="red-text text-darken-2" href="./cadastro.php">Cadastrar</a></li>';
+                        echo '<li><a class="red-text text-darken-2" href="../cadastro.php">Cadastrar</a></li>';
                     }
                 }
                 ?>
@@ -74,14 +75,15 @@
     </nav>
     <!-- navbar -->
 
-    <div class="container">
+    <div class="container admin">
     <h4>Administradores</h4>
-    <table class="tabelaprodutos table">
-        <thead class="tabelaprodutos-head thead-dark">
+    <table class="tabela-admin table">
+        <thead class="tabela-admin">
             <tr>
-                <th>#</th>
-                <th scope="col">Email</th>
-                <th scope="col">Data de Cadastro</th>
+                <th class="coluna" scope="col">#</th>
+                <th class="coluna" scope="col">Email</th>
+                <th class="coluna" scope="col">Data de Cadastro</th>
+                <th class="coluna" scope="col">Ação</th>
             </tr>
         </thead>
         <tbody>
@@ -97,7 +99,7 @@
                 <td> <?php echo $usuario->usuario; ?> </td>
                 <td> <?php echo  $usuario->data_cad; ?> </td>
                 <td>
-                    <a href='./editarAdmin.php?id=<?=$produto->codigo?>' class="btn waves-effect" >Editar</a>
+                    <a href='./editarAdmin.php?id=<?=$usuario->usuario?>' class="btn waves-effect" >Editar</a>
                     <a href='javascript:void(0)' class="btn waves-effect link_exclusao red" rel="<?= $produto->codigo;?>">Excluir</a>
                 </td>
             </tr>

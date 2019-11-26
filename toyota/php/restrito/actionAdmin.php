@@ -8,7 +8,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     
     
-	<title>Sistema de Cadastro</title>
+	<title>Admin</title>
 	
 </head>
 <body>
@@ -19,61 +19,47 @@
 		
 		$conexao = conexao::getInstance();
 
-        $mensagem = '';
-        $acao  = (isset($_POST['acao'])) ? $_POST['acao']  : '';
-		$nome  =  (isset($_POST['nome'])) ? $_POST['nome']  : '';
-		$email  = (isset($_POST['email'])) ? $_POST['email']  : '';
-		$endereco  = (isset($_POST['endereco'])) ? $_POST['endereco']  : '';
-		$senha  = (isset($_POST['password'])) ? $_POST['password']  : '';
-        $telefone  = (isset($_POST['telefone'])) ? $_POST['telefone']  : '';
-        $carro  = (isset($_POST['carro'])) ? $_POST['carro']  : '';
-        $marca = (isset($_POST['marca'])) ? $_POST['marca'] : '';
-		$modelo = (isset($_POST['modelo'])) ? $_POST['modelo'] : '';
-        $ano = (isset($_POST['ano']) and $carro === 'sim') ? $_POST['ano'] : '';
-
         
-        if ($acao != 'excluir'):
-            //verificando se existe usuario com o email, ja que existem 2 tabelas.
-            $sql = 'SELECT * FROM toyota.login where usuario=:email';
-            
-            $stm = $conexao->prepare($sql);
-            $stm->bindValue(':email', $email);
-            $stm->execute();
-            $confirmaUsuario = $stm->fetchAll(PDO::FETCH_OBJ);
+        $mensagem = '';
+        session_start(); 
+        $email = (isset($_POST['passwordConfAdmin'])) ? 
+        $carro  = (isset($_POST['carro'])) ? (isset($_POST['carro']))  : $_SESSION['carro'];
+		$marca = (isset($_POST['marca'])) ? $_POST['marca'] : '';
+		$modelo = (isset($_POST['modelo'])) ? $_POST['modelo'] : '';
+		$ano = (isset($_POST['ano'])) ? $_POST['ano'] : '';
 
-            if(!empty($confirmaUsuario)){
-                $mensagem .= "<li>Já existe um usuário com esse email.</li>";
-            }else{
-                if ($nome == '' || strlen($nome) < 3):
-                    $mensagem .= '<li>Favor preencher Nome</li>';
-                endif;
-                if ($telefone == '' || strlen($telefone) < 11):
-                    $mensagem .= '<li>Favor preencher Telefone com DDD</li>';
-                endif;
-                if (($email == '' || strlen($email) < 3)):
-                    $mensagem .= '<li>Email inválido</li>';
-                endif;
-                if ($senha == '' || strlen($senha) < 3):
-                    $mensagem .= '<li>Senha inválida</li>';
-                endif;
-                if ($carro == 'sim' ){
-                    if($marca == '' || strlen($marca) < 3){
-                        $mensagem .= '<li>Favor preencher Marca do seu veículo</li>';
-                    }
-                    if($modelo == '' || strlen($modelo) < 3){
-                        $mensagem .= '<li>Favor preencher Modelo do seu veículo</li>';
-                    }
-                    if($ano == '' || strlen($ano) < 4){
-                        $mensagem .= '<li>Favor informar Ano do seu veículo</li>';
-                    }
+
+        if ($acao != 'excluir'):
+			if ($nome == '' || strlen($nome) < 3):
+				$mensagem .= '<li>Favor preencher Nome</li>';
+		    endif;
+			if ($telefone == '' || strlen($telefone) < 11):
+				$mensagem .= '<li>Favor preencher Telefone com DDD</li>';
+		    endif;
+			if ($email == '' || strlen($email) < 3):
+				$mensagem .= '<li>Favor preencher Email</li>';
+		    endif;
+			if ($senha == '' || strlen($senha) < 3):
+				$mensagem .= '<li>Favor preencher Senha</li>';
+		    endif;
+			if ($carro == 'sim' ){
+                if($marca == '' || strlen($marca) < 3){
+                    $mensagem .= '<li>Favor preencher Marca do seu veículo</li>';
                 }
-            }	
+                if($modelo == '' || strlen($modelo) < 3){
+                    $mensagem .= '<li>Favor preencher Modelo do seu veículo</li>';
+                }
+                if($ano == '' || strlen($ano) < 4){
+                    $mensagem .= '<li>Favor informar Ano do seu veículo</li>';
+                }
+            }
+				
 
             if ($mensagem != ''){
                 $mensagem = '<ul>' . $mensagem . '</ul>';
 				echo "<div class='alert alert-danger' role='alert'>".$mensagem."</div> ";
             }
-        
+        endif;
 
 
 			
@@ -166,7 +152,7 @@
                     echo "<meta http-equiv=refresh content='3;URL=index.php'>";
                 endif;
             }
-        endif;
+
             if ($acao == 'excluir'):
 
                 // Captura o nome da foto para excluir da pasta

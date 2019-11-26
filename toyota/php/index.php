@@ -61,7 +61,7 @@
                 if(empty($user)){
                     
                     if($admin === false){
-                        echo '<li><a class="grey-text" href="./cadastro.php">Cadastrar</a></li>';
+                        echo '<li><a class="grey-text" href="./cadastroCliente.php">Cadastrar</a></li>';
                     }
                     echo '<li><a class="grey-text" href="./login.php">Entrar</a></li>';
                 }
