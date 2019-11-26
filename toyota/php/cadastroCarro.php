@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,43 +54,27 @@
     <div class="row container">
         <div class="container">
             <h3>Inscreva-se e garanta sua participação na nossa oferta Hilux</h3>
-            <form class="col s12" action="./cadastroCarro.php">
+            <form class="col s12" action="./actionCliente.php">
             <div class="row">
-                <div class="input-field col s6">
+                <div class="input-field col s12">
                     <input id="email" type="email" class="validate">
-                    <label for="email">Nome</label>
+                    <label for="email">Marca</label>
                 </div>
-                <div class="input-field col s6">
-                    <input id="password" type="password" class="validate">
-                    <label for="password">Telefone</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s6">
-                    <input id="password" type="password" class="validate">
-                    <label for="password">Email</label>
-                </div>
-                <div class="input-field col s6">
-                    <input id="password" type="password" class="validate">
-                    <label for="password">Senha</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s6">
-                    <input id="password" type="password" class="validate">
-                    <label for="password">Endereço</label>
-                </div>
-                <div class="input-field col s6">
-                    <select>
-                    <option value="" disabled selected>Possui carro?</option>
-                    <option value="sim">Sim</option>
-                    <option value="nao">Não</option>
-                    </select>
-                </div>
-            </div>
-            <input type="hidden" name="acao" value="incluir">
-            <div class="row">
                 
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="password" type="password" class="validate">
+                    <label for="password">Modelo</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="password" type="password" class="validate">
+                    <label for="password">Ano</label>
+                </div>
+            </div>
+            <div class="row">
                     <button id="login-button" type="button" class="waves-effect waves-light btn col s12">CADASTRAR</button>
                 
             </div>

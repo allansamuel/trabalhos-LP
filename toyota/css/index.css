@@ -37,6 +37,7 @@
 
 #conteudo{
     width: 100%;
+    position: relative;
     height: fit-content;
     overflow: hidden;
 }
@@ -44,10 +45,10 @@
     width: 100%;
 }
 .corolla-alpha{
-    
+    z-index: -1;
     position: absolute;
     right: -200px;
-    width: 60%;
+    width: 55%;
     opacity: .15;
     transform: rotate(-6deg);
 }
@@ -55,7 +56,8 @@
 #showcase-hilux{
     width: 100%;
     height: fit-content;
-    background-image: linear-gradient(rgb(38, 75, 88), rgb(23, 20, 31));
+    /* background-image: linear-gradient(rgb(38, 75, 88), rgb(23, 20, 31)); */
+    background-color: rgb(23, 20, 31);
 }
 #oferta-titulo{
     font-family: archivo black;
@@ -81,4 +83,52 @@
 .showcase.container{
     display: flex;
     flex-direction: row;
+}
+
+.titulo-sobreposto{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: absolute;
+    left: 16%;
+    top: 42%;
+    color: white;
+}
+
+.titulo-sobreposto-oferta{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 12%;
+    top: 50%;
+    color: white;
+}
+#hilux-info{
+    width: 64%;
+    border-radius: 20px;
+}
+#hilux-bg{
+    margin-bottom: -40px;
+}
+#btn-saibamais{
+    width: 100%;
+    margin-top: 10px;
+}
+.link-icon{
+    display: flex; 
+    flex-direction: row; 
+    align-items: center;
+    justify-content: flex-start;
+}
+.link-icon a{
+    margin-left:4px
+}
+#rodape .container{
+    padding-top: 50px;
+}
+#hilux-conheca{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 30px;
 }

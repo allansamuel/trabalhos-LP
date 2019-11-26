@@ -68,7 +68,7 @@
             <!-- Loading Screen -->
             <div data-u="loading" class="jssorl-009-spin" style="position:absolute;top:0px;left:0px;width:100%;height:100%;text-align:center;background-color:rgba(0,0,0,0.7);">
 
-                <img style="margin-top:-19px;position:relative;top:50%;width:38px;height:38px;" src="../svg/loading/static-svg/spin.svg" />
+                <img style="margin-top:-19px;position:relative;top:50%;width:38px;height:38px;" src="../img/loading.png" />
             </div>
 
             <!-- Slides Container Begin-->
@@ -87,7 +87,7 @@
             <!-- Slides Container End-->
 
             <!--Logo Begin-->
-            <div data-u="navigator" class="jssorb031" style="display: flex; flex-direction: row; align-items: center; position: absolute;left: 16%;top: 42%;;color: white;" data-autocenter="1" data-scale="0.5" data-scale-bottom="0.75">
+            <div data-u="navigator" class="jssorb031 titulo-sobreposto"  data-autocenter="1" data-scale="0.5" data-scale-bottom="0.75">
                     <img class="logo-titulo" src="../img/titulo-toyota.png" alt="">
                 
             </div>
@@ -122,82 +122,91 @@
                     <hr>
                     <h6>Conheça toda a linha Toyota e escolha o seu próximo carro. Acesse o nosso site oficial.</h6>
                     <h6>Assistência 24H</h6>
-                    <a href="https://toyota.com.br"> <button id="login-button" type="button" class="waves-effect waves-light btn col s12">Ir para o site</button></a>
+                    <a href="https://toyota.com.br"> <button id="login-button" type="button" class="waves-effect btn col s12">Ir para o site</button></a>
                 </div>
-                
+                <img class="corolla-alpha" src="../img/corolla.png" alt="">
             </div>
-            <img class="corolla-alpha" src="../img/corolla.png" alt="">
+            
         </div>
         
         <div id="ofertas">
             <div id="showcase-hilux">
                     <div class="showcase container">
                         <div class="col s6">
-                            <img src="../img/hilux.png" class="animated-hilux">
+                            <a href="./cadastro.php"><img src="../img/hilux.png" class="animated-hilux"></a>
+                            
                         </div>
                         <div class="col s6">
                             <h4 id="oferta-titulo">INSCREVA-SE E CONCORRA A UMA HILUX CABINE DUPLA</h4>
                         </div>
-                        
-                        
                     </div>
             </div>
-            <img src="https://www.toyota.com.br/wp-content/uploads/2015/11/tyt-hilux-simples-2016-banner-top.jpg" >
+            <div id="hilux-apresentacao">
+                <div class="titulo-sobreposto-oferta">
+                <h4>Não perca a oportunidade</h4>
+                <iframe width="480" height="260" src="https://www.youtube.com/embed/SOYVJjrW79c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <p>O sorteio será realizado dia XX de Dezembro. <a href="./cadastro.php">Saiba mais</a> </p> 
+                </div>
+            <img id="hilux-bg" src="https://www.toyota.com.br/wp-content/uploads/2015/11/tyt-hilux-simples-2016-banner-top.jpg" >
+            </div>
+            
+            <div id="hilux-conheca">
+                <a href="https://www.toyota.com.br/modelos/hilux-cabine-dupla/"><h4>Conheça a nova Hilux Cabine Dupla</h4></a>
+                
+                <img id="hilux-info" src="../img/hilux-info.png" >
+            </div>
         </div>
     </div>
     
-
+    
     <div id="rodape">
-            <div class="rodape-box" style="width: 25%;">
-                <div class="arrow_title">
+        <div class="container" style="display:flex;justify-content:space-around">
+            <div class="rodape-box">
+                    <div class="arrow_title">
+                        
+                        <h3>Atendimento</h3>
+                    </div>
                     
-                    <h3>Pagamento</h3>
-                </div>
-                <img src="../img/gallery/stickers/cartao_credito.png" width="100%">
-                <p style="padding-top: 10px;">Parcelas em até 24x no cartão sem juros.</p>
-            </div>
-            <div class="rodape-box" style="width: 30%; ">
-                <div class="arrow_title">
-                    
-                    <h3>Atendimento</h3>
-                </div>
-                <p>Toyota - CNPJ: 00.000.000/0000-00<br>R. Lorem ipsum dolor, 123 - Bairro Lorem ipsum - Lorem - LI - Brasil</p>
-                <ul>
-                    <li style="display: flex; flex-direction: row; flex-wrap: wrap">
-                        <div style="display: flex; flex-direction: row; margin-right: 4.2%;">
-                            <img class="rodape-icon" src="../img/gallery/icons/phone.png">
-                            <p style="color:white; "> (51) 0000-0000 / (51) 0000-0000</p>
-                        </div>
-                    </li>
-                    <li>
-                        <a target="_blank " href="vinhosdaserra@gmail.com "><img class="rodape-icon " src="../img/gallery/icons/mail.png "></a>
-                        <a href="mailto:vinhosdaserra@gmail.com ">vinhosdaserra@gmail.com</a>
-                    </li>
+                    <ul>
+                        <li class="link-icon">
+                            <div style="display: flex; flex-direction: row; align-items: center">
+                                <img class="rodape-icon" src="../img/gallery/icons/phone.png">
+                                <p style="color:white; "> (51) 0000-0000 / (51) 0000-0000</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="link-icon">
+                                <a target="_blank " href="vinhosdaserra@gmail.com "><img class="rodape-icon " src="../img/gallery/icons/mail.png "></a>
+                                <a href="mailto:vinhosdaserra@gmail.com ">toyota.sac@toyota.com</a>
+                            </div>
+                        </li>
 
-                </ul>
-            </div>
-            <div class="rodape-box " style="width: 18%; ">
-                <div class="arrow_title">
-                    
-                    <h3>Acompanhe-nos</h3>
+                    </ul>
                 </div>
+                <div class="rodape-box ">
+                    <div class="arrow_title">
+                        
+                        <h3>Acompanhe-nos</h3>
+                    </div>
 
-                <ul>
-                    <li style="display: flex; flex-direction: row ">
-                        <a target="_blank " href="http://www.facebook.com "><img class="rodape-icon " src="../img/gallery/icons/facebook.png "></a>
-                        <a target="_blank " href="http://www.facebook.com " style="margin-left:4px ">Facebook</a>
-                    </li>
-                    <li>
-                        <a target="_blank " href="http://www.instagram.com "><img class="rodape-icon " src="../img/gallery/icons/instagram.png "></a>
-                        <a target="_blank " href="http://www.facebook.com ">Instagram</a>
-                    </li>
-                    <li>
-                        <a target="_blank " href="http://www.youtube.com "><img class="rodape-icon " src="../img/gallery/icons/youtube.png "></a>
-                        <a target="_blank " href="http://www.youtube.com ">Youtube</a>
-                    </li>
-                </ul>
+                    <ul>
+                        <li class="link-icon">
+                            <a target="_blank " href="http://www.facebook.com "><img class="rodape-icon " src="../img/gallery/icons/facebook.png "></a>
+                            <a target="_blank " href="http://www.facebook.com " >Facebook</a>
+                        </li>
+                        <li class="link-icon">
+                            <a target="_blank " href="http://www.instagram.com "><img class="rodape-icon " src="../img/gallery/icons/instagram.png "></a>
+                            <a target="_blank " href="http://www.facebook.com ">Instagram</a>
+                        </li>
+                        <li class="link-icon">
+                            <a target="_blank " href="http://www.youtube.com "><img class="rodape-icon " src="../img/gallery/icons/youtube.png "></a>
+                            <a target="_blank " href="http://www.youtube.com ">Youtube</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
+        </div> 
+            
         <div id="rodape-creditos">
             <p style="margin-left: 2%; margin-block-end: 0;">Site desenvolvido por Allan Samuel Gomes Rodrigues (3i)</p>
         </div>
