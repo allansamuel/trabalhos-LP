@@ -24,24 +24,29 @@
     <?php
     require '../conexao.php';
 
-    session_start(); 
-    $admin  = (isset($_SESSION['admin'])) ? $_SESSION['admin']  : false;
-    $senha  =  (isset($_SESSION['senha'])) ? $_SESSION['senha']  : '';
-    $email  = (isset($_SESSION['email'])) ? $_SESSION['email']  : '';;
-    $user = (isset($_SESSION['user'])) ? $_SESSION['user']  : '';
+        session_start(); 
+        $admin  = (isset($_SESSION['admin'])) ? $_SESSION['admin']  : false;
+        $senha  =  (isset($_SESSION['senha'])) ? $_SESSION['senha']  : '';
+        $email  = (isset($_SESSION['email'])) ? $_SESSION['email']  : '';;
+        $user = (isset($_SESSION['user'])) ? $_SESSION['user']  : '';
 
-    if($admin === false){
-        header("Location: ../index.php");
-    }else{
+        if($admin === false){
+            header("Location: ../index.php");
+        }else{
+            $conexao = conexao::getInstance();
+            $sql = 'SELECT * FROM toyota.login';
+            $stm = $conexao->prepare($sql);
+            $stm->execute();
+            $usuarios = $stm->fetchAll(PDO::FETCH_OBJ);
     ?>
     <!-- navbar -->
     <nav class="nav-extended">
         <div class="nav-wrapper white">
             <div class="container">
-                <a href="../index.php" class="brand-logo grey-text"> <img src="../../img/logo.png" alt=""> </a>
+                <a href="../index.php" class="brand-logo"> <img src="../../img/logo.png" alt=""> </a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a class="tab grey-text " href="../index.php#sobre">Sobre</a></li>
-                <li><a class="grey-text" href="../index.php#ofertas">Ofertas</a></li>
+                <li><a class="tab red-text text-darken-2" href="../index.php#sobre"> Sobre</a></li>
+                <li><a class="red-text text-darken-2" href="../index.php#ofertas">Ofertas</a></li>
                 <?php
                 if(!empty($user)){
                     
@@ -50,15 +55,15 @@
                         <li><a href="./admin.php">Admin</a></li>
                         <li><a href="./clientes.php">Clientes</a></li>
                       </ul>';
-                        echo '<li><a class="dropdown-trigger grey-text" href="#!" data-target="dropdown1">Logado como Admin</a></li>';
+                        echo '<li><a class="dropdown-trigger red-text text-darken-2" href="#!" data-target="dropdown1">Logado como Admin</a></li>';
                     }
-                    echo '<li><a class="grey-text" href="../logout.php">Sair</a></li>';
+                    echo '<li><a class="red-text text-darken-2" href="./logout.php">Sair</a></li>';
                 }
                 
                 if(empty($user)){
-                    echo '<li><a class="grey-text" href="../login.php">Entrar</a></li>';
+                    echo '<li><a class="red-text text-darken-2" href="./login.php">Entrar</a></li>';
                     if($admin === false){
-                        echo '<li><a class="grey-text" href="../cadastro.php">Cadastrar</a></li>';
+                        echo '<li><a class="red-text text-darken-2" href="./cadastro.php">Cadastrar</a></li>';
                     }
                 }
                 ?>
@@ -71,9 +76,39 @@
 
     <div class="container">
     <h4>Administradores</h4>
-    <form action="">
+    <table class="tabelaprodutos table">
+        <thead class="tabelaprodutos-head thead-dark">
+            <tr>
+                <th>#</th>
+                <th scope="col">Email</th>
+                <th scope="col">Data de Cadastro</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            if(!empty($usuarios)){
+                $aux = 0;
+                foreach($usuarios as $usuario){
+                    $aux = $aux + 1;
+                  ?>  
+             
+            <tr>
+                <td> <?php echo $aux; ?> </td>
+                <td> <?php echo $usuario->usuario; ?> </td>
+                <td> <?php echo  $usuario->data_cad; ?> </td>
+                <td>
+                    <a href='./editarAdmin.php?id=<?=$produto->codigo?>' class="btn waves-effect" >Editar</a>
+                    <a href='javascript:void(0)' class="btn waves-effect link_exclusao red" rel="<?= $produto->codigo;?>">Excluir</a>
+                </td>
+            </tr>
 
-    </form>
+            <?php
+                   }
+                }
+            ?>
+            
+        </tbody>
+    </table>
     </div>
     <?php
     }

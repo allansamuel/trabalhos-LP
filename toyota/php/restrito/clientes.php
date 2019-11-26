@@ -38,10 +38,10 @@
     <nav class="nav-extended">
         <div class="nav-wrapper white">
             <div class="container">
-                <a href="../index.php" class="brand-logo grey-text"> <img src="../../img/logo.png" alt=""> </a>
+                <a href="../index.php" class="brand-logo"> <img src="../../img/logo.png" alt=""> </a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a class="tab grey-text " href="../index.php#sobre"> Sobre</a></li>
-                <li><a class="grey-text" href="../index.php#ofertas">Ofertas</a></li>
+                <li><a class="tab red-text text-darken-2" href="../index.php#sobre"> Sobre</a></li>
+                <li><a class="red-text text-darken-2" href="../index.php#ofertas">Ofertas</a></li>
                 <?php
                 if(!empty($user)){
                     
@@ -50,15 +50,15 @@
                         <li><a href="./admin.php">Admin</a></li>
                         <li><a href="./clientes.php">Clientes</a></li>
                       </ul>';
-                        echo '<li><a class="dropdown-trigger grey-text" href="#!" data-target="dropdown1">Logado como Admin</a></li>';
+                        echo '<li><a class="dropdown-trigger red-text text-darken-2" href="#!" data-target="dropdown1">Logado como Admin</a></li>';
                     }
-                    echo '<li><a class="grey-text" href="./logout.php">Sair</a></li>';
+                    echo '<li><a class="red-text text-darken-2" href="./logout.php">Sair</a></li>';
                 }
                 
                 if(empty($user)){
-                    echo '<li><a class="grey-text" href="./login.php">Entrar</a></li>';
+                    echo '<li><a class="red-text text-darken-2" href="./login.php">Entrar</a></li>';
                     if($admin === false){
-                        echo '<li><a class="grey-text" href="./cadastro.php">Cadastrar</a></li>';
+                        echo '<li><a class="red-text text-darken-2" href="./cadastro.php">Cadastrar</a></li>';
                     }
                 }
                 ?>

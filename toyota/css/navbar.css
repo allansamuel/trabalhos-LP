@@ -24,3 +24,7 @@ height: fit-content
     flex-direction: row;
     justify-content: flex-end;
 }
+
+.dropdown-content li>a, .dropdown-content li>span{
+    color: black;
+}
