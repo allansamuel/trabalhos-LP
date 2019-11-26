@@ -34,6 +34,18 @@
     <title>Ofertas Toyota</title>
 </head>
 <body>
+<?php
+    require './conexao.php';
+
+    session_start(); 
+    $admin  = $_SESSION['admin'];
+    $senha  =  $_SESSION['senha'];
+    $email  = $_SESSION['email'];
+    $user = $_SESSION['user'];
+    if(!empty($user)){
+        header("Location: ./index.php");   
+    }else{
+    ?>
     <!-- navbar -->
     <nav>
         <div class="nav-wrapper white">
@@ -42,8 +54,8 @@
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a class="grey-text" href="./index.php#sobre"> <h6>Sobre</h6></a></li>
                 <li><a class="grey-text" href="./index.php#ofertas"><h6>Ofertas</h6></a></li>
-                <li><a class="grey-text" href="./login.php"><h6>Entrar</h6></a></li>
                 <li><a class="grey-text" href="./cadastro.php"><h6>Cadastrar</h6></a></li>
+                <li><a class="grey-text" href="./login.php"><h6>Entrar</h6></a></li>
                 </ul>
             </div>
         </div>
@@ -99,7 +111,9 @@
         </div>
     
     </div>
-   
+   <?php
+    }
+   ?>
 </body>
 
 </html>

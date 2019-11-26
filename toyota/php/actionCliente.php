@@ -87,7 +87,7 @@
                     $retorno = $stm->execute();
     
                     if ($retorno):
-                        echo "<div class='alert alert-success' role='alert'>Registro inserido com sucesso, aguarde você está sendo redirecionado ...</div> ";
+                        echo "<div class='alert alert-success' role='alert'>Inscrição concluída! Aguarde o resultado e boa sorte!</div> ";
                     else:
                         echo "<div class='alert alert-danger' role='alert'>Erro ao inserir registro!</div> ";
                     endif;
