@@ -25,13 +25,12 @@
         $senhaConf = (isset($_POST['passwordConfAdmin'])) ? $_POST['passwordConfAdmin'] : '';
         $email  = (isset($_POST['emailAdmin'])) ? $_POST['emailAdmin']  : '';
         $senha = (isset($_POST['passwordAdmin'])) ? $_POST['passwordAdmin'] : '';
-        $dataCad = date("Y-m-d");
+        $dataCad = (isset($_POST['datacad'])) ? $_POST['datacad'] : date("Y-m-d");
 
 
         if ($acao != 'excluir'):
             //verificando se existe usuario com o email, ja que existem 2 tabelas.
             $sql = 'SELECT * FROM toyota.cadastro where email=:email';
-            
             $stm = $conexao->prepare($sql);
             $stm->bindValue(':email', $email);
             $stm->execute();

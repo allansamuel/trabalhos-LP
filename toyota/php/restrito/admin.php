@@ -98,7 +98,7 @@
             <tr>
                 <td> <?php echo $aux; ?> </td>
                 <td> <?php echo $usuario->usuario; ?> </td>
-                <td> <?php echo  $usuario->data_cad; ?> </td>
+                <td> <?php echo date("d/m/Y", strtotime($usuario->data_cad)); ?> </td>
                 <td>
                     <a href='./editarAdmin.php?id=<?=$usuario->usuario?>' class="btn waves-effect" >Editar</a>
                     <a href='javascript:void(0)' class="btn waves-effect link_exclusao red" rel="<?= $produto->codigo;?>">Excluir</a>
