@@ -75,10 +75,11 @@
     </nav>
     <!-- navbar -->
 
-    <div class="container admin">
-    <h4>Administradores</h4>
-    <table class="tabela-admin table">
-        <thead class="tabela-admin">
+    <div class="clientes">
+    <h4>Clientes da Promoção Hilux</h4>
+    <a href="./relatorio.php"><button class="btn waves-effect">Exportar relatório PDF</button></a> 
+    <table class="tabela-clientes table">
+        <thead class="tabela-clientes">
             <tr>
                 <th class="coluna" scope="col">#</th>
                 <th class="coluna" scope="col">Nome</th>

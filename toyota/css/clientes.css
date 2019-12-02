@@ -1,6 +1,10 @@
-.container.admin{
+.container.clientes{
     padding: 0 40px 0 40px;
 }
-.tabela-admin .coluna{
+.tabela-clientes .coluna{
     width: 10%;
+}
+
+.clientes{
+    padding: 0 40px 0 40px;
 }
