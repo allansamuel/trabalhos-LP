@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/navbar.css">
     <link rel="stylesheet" href="../../css/index.css">
     <link rel="stylesheet" href="../../css/rodape.css">
+    <link rel="stylesheet" href="../../css/cadastro.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato" />
     <link href='https://fonts.googleapis.com/css?family=Archivo Black' rel='stylesheet'>
@@ -101,29 +102,31 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s6">
+                    <div class="input-field col s12">
                         <input value="<?php  echo $cliente[0]->carro ?>" id="carro" name="carro" type="text" class="validate" required>
-                        
                         <label >Possui Carro?</label>
                     </div>
-                    <div class="input-field col s6">
-                            <input value="<?php  echo $cliente[0]->marca ?>"  id="marca" name="marca" type="text" class="validate">
-                            <label for="marca">Marca</label>
+                </div>
+                <div id="carro-inputs">
+                    <div class="row">
+                        <div class="input-field col s12">
+                                <input value="<?php  echo $cliente[0]->marca ?>"  id="marca" name="marca" type="text" class="validate">
+                                <label for="marca">Marca</label>
+                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input value="<?php  echo $cliente[0]->modelo ?>" id="modelo" name="modelo" type="text" class="validate">
+                            <label for="modelo">Modelo</label>
                         </div>
-                </div>
-            
-                
-                <div class="row">
-                    <div class="input-field col s6">
-                        <input value="<?php  echo $cliente[0]->modelo ?>" id="modelo" name="modelo" type="text" class="validate">
-                        <label for="modelo">Modelo</label>
-                    </div>
-                
-                    <div class="input-field col s6">
-                        <input value="<?php  echo $cliente[0]->ano ?>" id="ano" value="<?php echo date("Y"); ?>" name="ano" type="number" min="1900" max="9999" class="validate">
-                        <label for="ano">Ano</label>
+                    
+                        <div class="input-field col s6">
+                            <input value="<?php  echo $cliente[0]->ano ?>" id="ano" value="<?php echo date("Y"); ?>" name="ano" type="number" min="1900" max="9999" class="validate">
+                            <label for="ano">Ano</label>
+                        </div>
                     </div>
                 </div>
+              
                 
                 
                 <input type="hidden" name="id" value="<?php  echo $cliente[0]->cod_cli ?>">
@@ -146,9 +149,8 @@
    <script type="text/javascript">
     window.onload=function(){
     $(document).ready(function() {
-        $('select').material_select();
-
-        document.getElementById('carro').onchange = function(){
+        $('select').material_select(); 
+        document.getElementById('carro').onfocus = function(){
             if(document.getElementById('carro').value == 'sim'){
                 document.getElementById('marca').disabled = false;
                 document.getElementById('modelo').disabled = false;

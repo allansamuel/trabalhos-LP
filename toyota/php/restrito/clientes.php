@@ -34,11 +34,29 @@
         if($admin === false){
             header("Location: ../index.php");
         }else{
-            $conexao = conexao::getInstance();
-            $sql = 'SELECT * FROM toyota.cadastro';
-            $stm = $conexao->prepare($sql);
-            $stm->execute();
-            $usuarios = $stm->fetchAll(PDO::FETCH_OBJ);
+            $termo = (isset($_GET['termo'])) ? $_GET['termo'] : '';
+            $filtro = (isset($_GET['filtro'])) ? $_GET['filtro'] : '';
+            // Verifica se o termo de pesquisa está vazio, se estiver executa uma consulta completa
+            if (empty($termo)) :
+                $conexao = conexao::getInstance();
+                $sql = 'SELECT cod_cli, nome_cli, email, telefone, marca, carro, ano, modelo FROM cadastro';
+                if ($filtro == 'sem-carro') :
+                    $sql = 'SELECT cod_cli, nome_cli, email, telefone, marca, carro, ano, modelo FROM cadastro WHERE carro = "nao"';
+                elseif ($filtro == 'sem-toyota') :
+                    $sql = 'SELECT cod_cli, nome_cli, email, telefone, marca, carro, ano, modelo FROM cadastro WHERE carro = 1 AND lower(marca) NOT LIKE "toyota"';
+                endif;
+                $stm = $conexao->prepare($sql);
+                $stm->execute();
+                $usuarios = $stm->fetchAll(PDO::FETCH_OBJ);
+            else :
+                // Executa uma consulta baseada no termo de pesquisa passado como parâmetro
+                $conexao = conexao::getInstance();
+                $sql = 'SELECT cod_cli, nome_cli, email, telefone, marca, carro, ano, modelo FROM cadastro WHERE telefone LIKE :telefone';
+                $stm = $conexao->prepare($sql);
+                $stm->bindValue(':telefone', '%' . $termo . '%');
+                $stm->execute();
+                $usuarios = $stm->fetchAll(PDO::FETCH_OBJ);
+            endif;
     ?>
     <!-- navbar -->
     <nav class="nav-extended">
@@ -78,6 +96,38 @@
     <div class="clientes">
     <h4>Clientes da Promoção Hilux</h4>
     <a href="./relatorio.php"><button class="btn waves-effect">Exportar relatório PDF</button></a> 
+    <h4>Buscar usuários</h4>
+                <form method="GET" action="clientes.php">
+                    <div class="row filter-container">
+
+                        <div class="input-field col s4">
+                            <input id="telefone" type="text" name="termo">
+                            <label for="telefone">Buscar por telefone</label>
+                        </div>
+                        <div class="input-field col s1">
+                            <label class="radio-label">
+                                <input class="with-gap" name="filtro" type="radio" value="todos" checked />
+                                <span>Todos</span>
+                            </label>
+                        </div>
+                        <div class="input-field col s1">
+                            <label class="radio-label">
+                                <input class="with-gap" name="filtro" type="radio" value="sem-toyota" />
+                                <span>Sem carros Toyota</span>
+                            </label>
+                        </div>
+                        <div class="input-field col s1">
+                            <label class="radio-label">
+                                <input class="with-gap" name="filtro" type="radio" value="sem-carro" />
+                                <span>Sem carros</span>
+                            </label>
+                        </div>
+                        <div class="input-field buttons-section col s4">
+                            <button type="submit" class="waves-effect waves-light btn">Pesquisar</button>
+                        </div>
+
+                    </div>
+                </form>
     <table class="tabela-clientes table">
         <thead class="tabela-clientes">
             <tr>
