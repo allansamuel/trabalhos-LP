@@ -14,18 +14,20 @@
 <body>
 	<div class='container box-mensagem-crud'>
 		<?php 
-		require '../conexao.php';
-
+        require '../conexao.php';
+        
+        date_default_timezone_set('America/Sao_Paulo');
 		
 		$conexao = conexao::getInstance();
 
-        
+       
         $mensagem = '';
         $acao  = (isset($_POST['acao'])) ? $_POST['acao']  : '';
         $senhaConf = (isset($_POST['passwordConfAdmin'])) ? $_POST['passwordConfAdmin'] : '';
         $email  = (isset($_POST['emailAdmin'])) ? $_POST['emailAdmin']  : '';
+        $emailAux  = (isset($_POST['emailAux'])) ? $_POST['emailAux']  : '';
         $senha = (isset($_POST['passwordAdmin'])) ? $_POST['passwordAdmin'] : '';
-        $dataCad = (isset($_POST['datacad'])) ? $_POST['datacad'] : date("Y-m-d");
+        $dataCad = (isset($_POST['datacad'])) ? date("Y-d-m", strtotime($_POST['datacad'])) : date("Y-m-d"); ;
 
 
         if ($acao != 'excluir'):
@@ -36,7 +38,7 @@
             $stm->execute();
             $confirmaUsuarioCli = $stm->fetchAll(PDO::FETCH_OBJ);
 
-            if(!empty($confirmaUsuarioCli)){
+            if(!empty($confirmaUsuarioCli) and $acao != 'editar'){
                 $mensagem .= "<li>Já existe um usuário com esse email.</li>";
             }else{
                 $sql = 'SELECT * FROM toyota.login where usuario=:email';
@@ -45,7 +47,7 @@
                 $stm->bindValue(':email', $email);
                 $stm->execute();
                 $confirmaUsuarioAdm = $stm->fetchAll(PDO::FETCH_OBJ);
-                if(!empty($confirmaUsuarioAdm)){
+                if(!empty($confirmaUsuarioAdm) and $acao != 'editar'){
                     $mensagem .= "<li>Já existe um usuário com esse email.</li>";
                 }else{
 
@@ -55,7 +57,7 @@
                     if ($senha == '' || strlen($senha) < 3):
                         $mensagem .= '<li>Senha inválida</li>';
                     endif;
-                    if ($senha !== $senhaConf):
+                    if ($acao == 'incluir' and ($senha !== $senhaConf)):
                         $mensagem .= '<li>As senhas não condizem</li>';
                     endif;
                     
@@ -94,54 +96,16 @@
 
                 if ($acao == 'editar'):
 
-                    if(isset($_FILES['foto']) && $_FILES['foto']['size'] > 0): 
-        
-                        // Verifica se a foto é diferente da padrão, se verdadeiro exclui a foto antiga da pasta
-                        if ($foto_atual <> 'padrao.jpg'):
-                            unlink("../fotos/" . $foto_atual);
-                        endif;
-                        $extensoes_aceitas = array('bmp' ,'png', 'svg', 'jpeg', 'jpg');
-                        $extensao = strtolower(end(explode('.', $_FILES['foto']['name'])));
-        
-                        // Validamos se a extensão do arquivo é aceita
-                        if (array_search($extensao, $extensoes_aceitas) === false):
-                        echo "<h1>Extensão Inválida!</h1>";
-                        exit;
-                        endif;
-        
-                        // Verifica se o upload foi enviado via POST   
-                        if(is_uploaded_file($_FILES['foto']['tmp_name'])):  
-                                
-                            // Verifica se o diretório de destino existe, senão existir cria o diretório  
-                            if(!file_exists("../fotos")):  
-                                mkdir("../fotos");  
-                            endif;  
                     
-                            // Monta o caminho de destino com o nome do arquivo  
-                            $nome_foto = date('dmY') . '_' . $_FILES['foto']['name'];  
-                                
-                            // Essa função move_uploaded_file() copia e verifica se o arquivo enviado foi copiado com sucesso para o destino  
-                            if (!move_uploaded_file($_FILES['foto']['tmp_name'], '../fotos/'.$nome_foto)):  
-                                echo "Houve um erro ao gravar arquivo na pasta de destino!";  
-                            endif;  
-                        endif;
-                    else:
-        
-                        $nome_foto = $foto_atual;
-        
-                    endif;
                     
-                    $sql = 'UPDATE produtos SET tipo=:tipo, marca=:marca, descricao=:descricao, valor= format( :valor , 2 ), qtd_estoque=:qtd_estoque, foto=:foto ';
-                    $sql .= 'WHERE codigo = :id';
+                    $sql = 'UPDATE toyota.login SET usuario=:usuario, senha=:senha, data_cad=:datacad ';
+                    $sql .= 'WHERE usuario = :aux';
         
                     $stm = $conexao->prepare($sql);
-                    $stm->bindValue(':tipo', $tipo);
-                    $stm->bindValue(':marca', $marca);
-                    $stm->bindValue(':descricao', $descricao);
-                    $stm->bindValue(':valor', $valor);
-                    $stm->bindValue(':qtd_estoque', $qtd_estoque);
-                    $stm->bindValue(':foto', $nome_foto);
-                    $stm->bindValue(':id', $id);
+                    $stm->bindValue(':usuario', $email);
+                    $stm->bindValue(':senha', $senha);
+                    $stm->bindValue(':datacad', $dataCad);
+                    $stm->bindValue(':aux', $emailAux);
                     $retorno = $stm->execute();
         
                     if ($retorno):
@@ -150,27 +114,15 @@
                         echo "<div class='alert alert-danger' role='alert'>Erro ao editar registro!</div> ";
                     endif;
         
-                    echo "<meta http-equiv=refresh content='3;URL=index.php'>";
+                    echo "<meta http-equiv=refresh content='3;URL=admin.php'>";
                 endif;
             }
 
             if ($acao == 'excluir'):
 
-                // Captura o nome da foto para excluir da pasta
-                $sql = "SELECT foto FROM produtos WHERE codigo = :id ";
+                $sql = 'DELETE FROM toyota.login WHERE usuario = :usuario';
                 $stm = $conexao->prepare($sql);
-                $stm->bindValue(':id', $id);
-                $stm->execute();
-                $produto = $stm->fetch(PDO::FETCH_OBJ);
-    
-                if (!empty($produto) && file_exists('../fotos/'.$produto->foto)):
-                    unlink("../fotos/" . $produto->foto);
-                endif;
-    
-                // Exclui o registro do banco de dados
-                $sql = 'DELETE FROM produtos WHERE codigo = :id';
-                $stm = $conexao->prepare($sql);
-                $stm->bindValue(':id', $id);
+                $stm->bindValue(':usuario', $email);
                 $retorno = $stm->execute();
     
                 if ($retorno):
@@ -179,7 +131,7 @@
                     echo "<div class='alert alert-danger' role='alert'>Erro ao excluir registro!</div> ";
                 endif;
     
-                echo "<meta http-equiv=refresh content='3;URL=index.php'>";
+                echo "<meta http-equiv=refresh content='3;URL=admin.php'>";
             endif;
 		?>
 </body>

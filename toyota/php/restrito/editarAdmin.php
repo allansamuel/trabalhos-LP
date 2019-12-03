@@ -42,11 +42,11 @@
     }else{
         require '../conexao.php';
         $conexao = conexao::getInstance();
-        $id = $_GET['id'];
-        $sql = 'SELECT * FROM toyota.login where usuario=:id';
+        $email = $_GET['emailAdmin'];
+        $sql = 'SELECT * FROM toyota.login where usuario=:usuario';
         
         $stm = $conexao->prepare($sql);
-        $stm->bindValue(':id', $id);
+        $stm->bindValue(':usuario', $email);
         $stm->execute();
         $administrador = $stm->fetchAll(PDO::FETCH_OBJ);
     ?>
@@ -100,6 +100,7 @@
                     </div>
                    
                 </div>
+                <input type="hidden" name="emailAux" value="<?php echo $administrador[0]->usuario ?>">
                 <input type="hidden" name="acao" value="editar">
                 <div class="row">
                     

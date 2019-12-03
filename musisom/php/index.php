@@ -135,6 +135,6 @@ endif;
             
         </tbody>
     </table>
-    <script type="text/javascript" src="../js/custom.js"></script>
+    <!-- <script type="text/javascript" src="../js/custom.js"></script> -->
 </body>
 </html>

@@ -100,8 +100,9 @@
                 <td> <?php echo $usuario->usuario; ?> </td>
                 <td> <?php echo date("d/m/Y", strtotime($usuario->data_cad)); ?> </td>
                 <td>
-                    <a href='./editarAdmin.php?id=<?=$usuario->usuario?>' class="btn waves-effect" >Editar</a>
-                    <a href='javascript:void(0)' class="btn waves-effect link_exclusao red" rel="<?= $produto->codigo;?>">Excluir</a>
+                    <a href='./editarAdmin.php?emailAdmin=<?php echo $usuario->usuario ?>' class="btn waves-effect" >Editar</a>
+                    <a onClick="confirmaExclusao(<?php echo "'".$usuario->usuario."'" ?>)" class="btn waves-effect red">Excluir</a>
+                
                 </td>
             </tr>
 
@@ -123,6 +124,41 @@
         
         $('.dropdown-trigger').dropdown();
     </script>
+
+    <script type="text/javascript" >
+
+        function confirmaExclusao(id){
+            retorno = confirm("Deseja excluir esse Registro?")
+            if (retorno){
+
+                //Cria um formulário
+                var formulario = document.createElement("form");
+                formulario.action = "actionAdmin.php";
+                formulario.method = "post";
+
+                // Cria os inputs e adiciona ao formulário
+                var inputAcao = document.createElement("input");
+                inputAcao.type = "hidden";
+                inputAcao.value = "excluir";
+                inputAcao.name = "acao";
+                formulario.appendChild(inputAcao); 
+
+                var inputId = document.createElement("input");
+                inputId.type = "hidden";
+                inputId.value = id;
+                inputId.name = "emailAdmin";
+                formulario.appendChild(inputId);
+
+                //Adiciona o formulário ao corpo do documento
+                document.body.appendChild(formulario);
+
+                //Envia o formulário
+                formulario.submit();
+            }
+        }
+
+    </script>
+    
 </body>
 
 </html>
