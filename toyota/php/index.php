@@ -238,7 +238,7 @@
         </div> 
             
         <div id="rodape-creditos">
-            <p style="margin-left: 2%; margin-block-end: 0;">Site desenvolvido por Allan Samuel Gomes Rodrigues (3i)</p>
+            <p style="margin-left: 2%; margin-block-end: 0;">Site desenvolvido por <a href="https://www.github.com/allansamuel">Allan Rodrigues</a> & <a href="https://www.github.com/BetaTeixeira">Roberta Teixeira</a> </p>
         </div>
 
     <script src="../js/jquery-1.9.1.min.js"></script>
