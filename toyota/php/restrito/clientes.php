@@ -111,7 +111,7 @@
                 <td> <?php echo  $usuario->ano; ?> </td>
                 <td>
                     <a href='./editarCliente.php?id=<?=$usuario->cod_cli?>' class="btn waves-effect" >Editar</a>
-                    <a href='javascript:void(0)' class="btn waves-effect link_exclusao red" rel="<?= $usuario->cod_cli;?>">Excluir</a>
+                    <a onClick="confirmaExclusao(<?php echo "'".$usuario->cod_cli."'" ?>)" class="btn waves-effect red">Excluir</a>
                 </td>
             </tr>
 
@@ -132,6 +132,39 @@
     <script type="text/javascript" >
         
         $('.dropdown-trigger').dropdown();
+    </script>
+    <script type="text/javascript" >
+
+    function confirmaExclusao(id){
+        retorno = confirm("Deseja excluir esse Registro?")
+        if (retorno){
+
+            //Cria um formulário
+            var formulario = document.createElement("form");
+            formulario.action = "../actionCliente.php";
+            formulario.method = "post";
+
+            // Cria os inputs e adiciona ao formulário
+            var inputAcao = document.createElement("input");
+            inputAcao.type = "hidden";
+            inputAcao.value = "excluir";
+            inputAcao.name = "acao";
+            formulario.appendChild(inputAcao); 
+
+            var inputId = document.createElement("input");
+            inputId.type = "hidden";
+            inputId.value = id;
+            inputId.name = "id";
+            formulario.appendChild(inputId);
+
+            //Adiciona o formulário ao corpo do documento
+            document.body.appendChild(formulario);
+
+            //Envia o formulário
+            formulario.submit();
+        }
+    }
+
     </script>
 </body>
 

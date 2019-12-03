@@ -78,11 +78,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s6">
-                        <input id="endereco" name="endereco" type="text" class="validate" required>
-                        <label for="endereco">Endereço</label>
-                    </div>
-                    <div class="input-field col s6">
+                    <div class="input-field col s12">
                         
                         <select id="carro" name="carro" required>
                         <option value="nao">Não</option>

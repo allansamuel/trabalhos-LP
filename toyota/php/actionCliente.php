@@ -21,9 +21,9 @@
 
         $mensagem = '';
         $acao  = (isset($_POST['acao'])) ? $_POST['acao']  : '';
+        $id  = (isset($_POST['id'])) ? $_POST['id']  : '';
 		$nome  =  (isset($_POST['nome'])) ? $_POST['nome']  : '';
 		$email  = (isset($_POST['email'])) ? $_POST['email']  : '';
-		$endereco  = (isset($_POST['endereco'])) ? $_POST['endereco']  : '';
 		$senha  = (isset($_POST['password'])) ? $_POST['password']  : '';
         $telefone  = (isset($_POST['telefone'])) ? $_POST['telefone']  : '';
         $carro  = (isset($_POST['carro'])) ? $_POST['carro']  : '';
@@ -41,7 +41,7 @@
             $stm->execute();
             $confirmaUsuarioAdm = $stm->fetchAll(PDO::FETCH_OBJ);
 
-            if(!empty($confirmaUsuarioAdm)){
+            if(!empty($confirmaUsuarioAdm) and $acao != 'editar'){
                 $mensagem .= "<li>Já existe um usuário com esse email.</li>";
             }else{
                 $sql = 'SELECT * FROM toyota.cadastro where email=:email';
@@ -51,7 +51,7 @@
                 $stm->execute();
                 $confirmaUsuarioCli = $stm->fetchAll(PDO::FETCH_OBJ);
 
-                if(!empty($confirmaUsuarioCli)){
+                if(!empty($confirmaUsuarioCli) and $acao != 'editar'){
                     $mensagem .= "<li>Já existe um usuário com esse email.</li>";
                 }else{
                     if ($nome == '' || strlen($nome) < 3):
@@ -76,6 +76,8 @@
                         if($ano == '' || strlen($ano) < 4){
                             $mensagem .= '<li>Favor informar Ano do seu veículo</li>';
                         }
+                    }else if($carro != 'sim' and $carro != 'nao'){
+                        $mensagem .= '<li>Insira \'sim\' se possui carro e \'nao\' caso não possua no campo carro.</li>';
                     }
                 }	
             }
@@ -117,81 +119,44 @@
 
                 if ($acao == 'editar'):
 
-                    if(isset($_FILES['foto']) && $_FILES['foto']['size'] > 0): 
-        
-                        // Verifica se a foto é diferente da padrão, se verdadeiro exclui a foto antiga da pasta
-                        if ($foto_atual <> 'padrao.jpg'):
-                            unlink("../fotos/" . $foto_atual);
-                        endif;
-                        $extensoes_aceitas = array('bmp' ,'png', 'svg', 'jpeg', 'jpg');
-                        $extensao = strtolower(end(explode('.', $_FILES['foto']['name'])));
-        
-                        // Validamos se a extensão do arquivo é aceita
-                        if (array_search($extensao, $extensoes_aceitas) === false):
-                        echo "<h1>Extensão Inválida!</h1>";
-                        exit;
-                        endif;
-        
-                        // Verifica se o upload foi enviado via POST   
-                        if(is_uploaded_file($_FILES['foto']['tmp_name'])):  
-                                
-                            // Verifica se o diretório de destino existe, senão existir cria o diretório  
-                            if(!file_exists("../fotos")):  
-                                mkdir("../fotos");  
-                            endif;  
                     
-                            // Monta o caminho de destino com o nome do arquivo  
-                            $nome_foto = date('dmY') . '_' . $_FILES['foto']['name'];  
-                                
-                            // Essa função move_uploaded_file() copia e verifica se o arquivo enviado foi copiado com sucesso para o destino  
-                            if (!move_uploaded_file($_FILES['foto']['tmp_name'], '../fotos/'.$nome_foto)):  
-                                echo "Houve um erro ao gravar arquivo na pasta de destino!";  
-                            endif;  
-                        endif;
-                    else:
-        
-                        $nome_foto = $foto_atual;
-        
-                    endif;
-                    
-                    $sql = 'UPDATE produtos SET tipo=:tipo, marca=:marca, descricao=:descricao, valor= format( :valor , 2 ), qtd_estoque=:qtd_estoque, foto=:foto ';
-                    $sql .= 'WHERE codigo = :id';
-        
+                    $sql = 'UPDATE toyota.cadastro SET 
+                    nome_cli=:nome, 
+                    telefone=:telefone, 
+                    email=:email, 
+                    senha= :senha, 
+                    carro=:carro,
+                    marca=:marca,
+                    modelo=:modelo,
+                    ano=:ano
+                    WHERE cod_cli = :id';
+
                     $stm = $conexao->prepare($sql);
-                    $stm->bindValue(':tipo', $tipo);
+                    $stm->bindValue(':nome', $nome);
                     $stm->bindValue(':marca', $marca);
-                    $stm->bindValue(':descricao', $descricao);
-                    $stm->bindValue(':valor', $valor);
-                    $stm->bindValue(':qtd_estoque', $qtd_estoque);
-                    $stm->bindValue(':foto', $nome_foto);
+                    $stm->bindValue(':telefone', $telefone);
+                    $stm->bindValue(':email', $email);
+                    $stm->bindValue(':senha', $senha);
+                    $stm->bindValue(':carro', $carro);
+                    $stm->bindValue(':modelo', $modelo);
+                    $stm->bindValue(':ano', $ano);
                     $stm->bindValue(':id', $id);
                     $retorno = $stm->execute();
-        
+                    
                     if ($retorno):
                         echo "<div class='alert alert-success' role='alert'>Registro editado com sucesso, aguarde você está sendo redirecionado ...</div> ";
                     else:
                         echo "<div class='alert alert-danger' role='alert'>Erro ao editar registro!</div> ";
                     endif;
         
-                    echo "<meta http-equiv=refresh content='3;URL=index.php'>";
+                    echo "<meta http-equiv=refresh content='3;URL=./restrito/clientes.php'>";
                 endif;
             }
         endif;
             if ($acao == 'excluir'):
-
-                // Captura o nome da foto para excluir da pasta
-                $sql = "SELECT foto FROM produtos WHERE codigo = :id ";
-                $stm = $conexao->prepare($sql);
-                $stm->bindValue(':id', $id);
-                $stm->execute();
-                $produto = $stm->fetch(PDO::FETCH_OBJ);
-    
-                if (!empty($produto) && file_exists('../fotos/'.$produto->foto)):
-                    unlink("../fotos/" . $produto->foto);
-                endif;
     
                 // Exclui o registro do banco de dados
-                $sql = 'DELETE FROM produtos WHERE codigo = :id';
+                $sql = 'DELETE FROM toyota.cadastro WHERE cod_cli = :id';
                 $stm = $conexao->prepare($sql);
                 $stm->bindValue(':id', $id);
                 $retorno = $stm->execute();
@@ -202,7 +167,7 @@
                     echo "<div class='alert alert-danger' role='alert'>Erro ao excluir registro!</div> ";
                 endif;
     
-                echo "<meta http-equiv=refresh content='3;URL=index.php'>";
+                echo "<meta http-equiv=refresh content='3;URL=./restrito/clientes.php'>";
             endif;
 		?>
 </body>
