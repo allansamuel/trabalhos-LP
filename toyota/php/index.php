@@ -162,12 +162,18 @@
         <div id="ofertas">
             <div id="showcase-hilux">
                     <div class="showcase container">
-                        <div class="col s6">
-                            <a href="./cadastro.php"><img src="../img/hilux.png" class="animated-hilux"></a>
+                        <div class="hilux-container col s6">
+                            <a href="./cadastroCliente.php"><img src="../img/hilux.png" class="animated-hilux"></a>
                             
                         </div>
                         <div class="col s6">
                             <h4 id="oferta-titulo">INSCREVA-SE E CONCORRA A UMA HILUX CABINE DUPLA</h4>
+                            <h6>
+                                A nova Hilux é a única picape média avaliada pelo Latin NCAP com nota máxima de cinco estrelas em
+                                segurança para passageiro adulto e passageiro infantil. Com sete airbags 3, freios ABS com EBD e
+                                BAS, e uma nova estrutura mais robusta, a Nova Hilux une conforto, dirigibilidade e segurança em uma
+                                única picape.
+                            </h6>
                         </div>
                     </div>
             </div>
@@ -175,7 +181,7 @@
                 <div class="titulo-sobreposto-oferta">
                 <h4>Não perca a oportunidade</h4>
                 <iframe width="480" height="260" src="https://www.youtube.com/embed/SOYVJjrW79c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                <p>O sorteio será realizado dia 25 de Dezembro. <a href="./cadastro.php">Saiba mais</a> </p> 
+                <p>O sorteio será realizado dia 25 de Dezembro. <a href="./cadastroCliente.php">Saiba mais</a> </p> 
                 </div>
             <img id="hilux-bg" src="https://www.toyota.com.br/wp-content/uploads/2015/11/tyt-hilux-simples-2016-banner-top.jpg" >
             </div>

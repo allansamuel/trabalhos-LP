@@ -58,6 +58,7 @@
     height: fit-content;
     /* background-image: linear-gradient(rgb(38, 75, 88), rgb(23, 20, 31)); */
     background-color: rgb(23, 20, 31);
+    padding-bottom: 40px;
 }
 #oferta-titulo{
     font-family: archivo black;
@@ -69,11 +70,13 @@
 h3,h4, h2{
     font-family: archivo black;
 }
-
+.hilux-container{
+    height: fit-content;
+}
 .animated-hilux{
     opacity: 1;
     transition: 0.3s;
-    width: 100%;
+    width: 120%;
 }
 
 .animated-hilux:hover{
@@ -83,6 +86,7 @@ h3,h4, h2{
 .showcase.container{
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
 .titulo-sobreposto{
@@ -131,4 +135,11 @@ h3,h4, h2{
     flex-direction: column;
     align-items: center;
     padding-top: 30px;
+}
+#ofertas h6{
+    padding-left: 80px ;
+    text-align: right;
+    font-family: Lato;
+    color: white;
+    font-weight: lighter;
 }
